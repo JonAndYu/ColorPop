@@ -14,36 +14,36 @@ namespace ColorPop.Core.Models;
 ///
 /// All game rules and mutations are handled in GameEngine, NOT here.
 /// </remarks>
-public sealed class GameState
+public sealed record GameState
 {
     /// <summary>
     /// The current board configuration containing all tokens.
     /// Represents a 10x10 grid (or configurable size in future versions).
     /// </summary>
-    public Board Board { get; }
+    public Board Board { get; init; }
 
     /// <summary>
     /// The list of players participating in the game.
     /// Each player contains hidden information (e.g., secret color) and score state.
     /// </summary>
-    public IReadOnlyList<Player> Players { get; }
+    public IReadOnlyList<Player> Players { get; init; }
 
     /// <summary>
     /// Index of the player whose turn it currently is.
     /// Used to determine turn order from the Players list.
     /// </summary>
-    public int CurrentPlayerIndex { get; }
+    public int CurrentPlayerIndex { get; init; }
 
     /// <summary>
     /// Current status of the game (InProgress, Finished, etc.).
     /// </summary>
-    public GameStatus Status { get; }
+    public GameStatus Status { get; init; }
 
     /// <summary>
     /// Tracks the number of turns that have occurred in the game.
     /// Useful for analytics, replay systems, or debugging.
     /// </summary>
-    public int TurnNumber { get; }
+    public int TurnNumber { get; init; }
 
     /// <summary>
     /// Creates a new immutable GameState snapshot.

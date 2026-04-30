@@ -1,10 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ColorPop.Core.Enums;
+using ColorPop.Core.Interfaces;
+using ColorPop.Core.Models;
 
-namespace ColorPop.Core.Rules
+namespace ColorPop.Core.Rules;
+
+internal class JokerResolver : IJokerResolver
 {
-    internal class JokerResolver
+    public IReadOnlySet<Position> ExpandClusterWithJokers(Board board, IReadOnlySet<Position> baseCluster)
     {
+        throw new NotImplementedException();
+    }
+
+    public TokenColor ResolveColor(Board board, Position jokerPosition)
+    {
+        throw new NotImplementedException();
     }
 }

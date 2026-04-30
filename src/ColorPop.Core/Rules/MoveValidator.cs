@@ -1,10 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ColorPop.Core.Interfaces;
+using ColorPop.Core.Models;
+using System.ComponentModel.DataAnnotations;
 
-namespace ColorPop.Core.Rules
+namespace ColorPop.Core.Rules;
+
+internal class MoveValidator : IMoveValidator
 {
-    internal class MoveValidator
+    public bool IsValid(GameState state, Move move)
     {
+        throw new NotImplementedException();
+    }
+
+    public ValidationResult Validate(GameState state, Move move)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -59,10 +59,19 @@ public sealed class Board
     }
 
     /// <summary>
-    /// Removes a token from the board (sets it to empty/air).
+    /// Removes a group of tokens from the board (sets it to empty/air).
     /// </summary>
-    public Board RemoveCell(Position position)
-        => WithCell(position, new Token(TokenColor.Joker)); // or define Empty token later
+    public Board RemoveCells(IEnumerable<Position> positions)
+    {
+        var board = this;
+
+        foreach (var pos in positions)
+        {
+            board = board.RemoveCell(pos);
+        }
+
+        return board;
+    }
 
     /// <summary>
     /// Returns all positions in the board.
@@ -87,4 +96,10 @@ public sealed class Board
            pos.Row < Rows &&
            pos.Col >= 0 &&
            pos.Col < Cols;
+
+    /// <summary>
+    /// Removes a token from the board (sets it to empty/air).
+    /// </summary>
+    private Board RemoveCell(Position position)
+        => WithCell(position, Token.Empty);
 }

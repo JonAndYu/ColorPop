@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ColorPop.Core.Interfaces;
+using ColorPop.Core.Models;
 
-namespace ColorPop.Core.Rules
+namespace ColorPop.Core.Rules;
+
+internal class GravityEngine : IGravityEngine
 {
-    internal class GravityEngine
+    public Board ApplyGravity(Board board)
     {
+        throw new NotImplementedException();
     }
 }
