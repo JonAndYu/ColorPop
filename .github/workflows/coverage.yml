@@ -1,4 +1,4 @@
-name: Test Coverage
+name: Test & Coverage
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  coverage:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,7 +22,7 @@ jobs:
         run: dotnet restore
 
       - name: Run tests with coverage
-        run: dotnet test --no-restore --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./coverage.xml /p:Threshold=0 /p:ThresholdType=line /p:ThresholdStat=total
+        run: dotnet test --no-restore --configuration Release --logger "console;verbosity=normal" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./coverage.xml /p:Threshold=0 /p:ThresholdType=line /p:ThresholdStat=total
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
