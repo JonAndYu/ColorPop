@@ -1,0 +1,7 @@
+Colorpop seems like a video game brought to the board game world, complete with a cool gadget to mimic the work done by our digital overlords.
+
+The game board consists of an inclined plastic holder that holds ten racks, with each rack holding ten colored tokens. Tokens come in five player colors (19 each) and the white Jokers (5). To set up the game, slide the tokens into the racks, then place the racks in the holder so that no more than color has more than five tokens orthogonally connected. Each player then receives a token that reveals her color for the game, a token that she keeps hidden from other players.
+
+On a turn, a player chooses a group of two or more orthogonally connected tokens and pushes on these tokens so that they fall through the racks and down the holder. (A player can choose to make a joker any color, so she can include or exclude a joker as she wishes during her turn.) Any tokens that were above these will slide down inside the racks. The player keeps all the tokens removed.
+
+Players take turns removing tokens until either a player is eliminated from the game or no groups of two or more tokens remain. At this point, the game ends and players reveal their secret colors. Whoever has the fewest tokens of her color on the board wins! If two or more players are tied, they compare the tokens they collected during the game; whoever collected fewer of his or her own color wins.

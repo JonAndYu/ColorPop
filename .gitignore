@@ -1,0 +1,54 @@
+# =========================
+# Build outputs
+# =========================
+bin/
+obj/
+
+# =========================
+# Visual Studio
+# =========================
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# =========================
+# OS generated files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# .NET build artifacts
+# =========================
+*.dll
+*.exe
+*.pdb
+*.cache
+*.log
+
+# =========================
+# Test results
+# =========================
+TestResults/
+coverage/
+
+# =========================
+# NuGet
+# =========================
+*.nupkg
+.nuget/
+
+# =========================
+# Publish output
+# =========================
+publish/
+
+# =========================
+# Environment / secrets
+# =========================
+appsettings.Development.json
+appsettings.local.json
+*.env

@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/Documentation/">
+    <File Path="Rules.md" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="Dictionary.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/ColorPop.Core/ColorPop.Core.csproj" />
+    <Project Path="src/ColorPop.Simulation/ColorPop.Simulation.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ColorPop.Tests/ColorPop.Tests.csproj" />
+  </Folder>
+</Solution>
