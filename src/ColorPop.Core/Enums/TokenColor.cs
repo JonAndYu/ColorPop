@@ -2,11 +2,12 @@
 {
     public enum TokenColor
     {
+        Empty,
         Yellow,
         Green,
         Pink,
         Orange,
         Blue,
-        White
+        Joker
     }
 }
