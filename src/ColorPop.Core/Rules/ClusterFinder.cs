@@ -40,7 +40,7 @@ internal sealed class ClusterFinder : IClusterFinder
                 if (visited.Contains(position))
                     continue;
 
-                var token = board.Get(position);
+                var token = board.GetToken(position);
 
                 // Skip empty cells
                 if (token.Color == TokenColor.Empty)
@@ -65,7 +65,7 @@ internal sealed class ClusterFinder : IClusterFinder
     /// </summary>
     public IReadOnlySet<Position> FindCluster(Board board, Position start)
     {
-        var token = board.Get(start);
+        var token = board.GetToken(start);
 
         if (token.Color == TokenColor.Empty)
             return new HashSet<Position>();
@@ -115,7 +115,7 @@ internal sealed class ClusterFinder : IClusterFinder
                 if (result.Contains(neighbor))
                     continue;
 
-                var token = board.Get(neighbor);
+                var token = board.GetToken(neighbor);
 
                 // Only include matching color tokens
                 if (token.Color != color)
