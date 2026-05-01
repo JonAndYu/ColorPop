@@ -1,4 +1,4 @@
-﻿namespace ColorPop.Core.Enums;
+namespace ColorPop.Core.Enums;
 
 public enum GameStatus
 {

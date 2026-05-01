@@ -1,10 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ColorPop.Simulation.Input
+namespace ColorPop.Simulation.Input;
+
+internal class CommandParser
 {
-    internal class CommandParser
-    {
-    }
 }

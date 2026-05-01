@@ -1,4 +1,4 @@
-﻿using ColorPop.Core.Enums;
+using ColorPop.Core.Enums;
 using ColorPop.Core.Models;
 
 namespace ColorPop.Core.Interfaces;
@@ -15,12 +15,12 @@ public interface IJokerResolver
     /// <summary>
     /// Determines what color a joker should represent in context.
     /// </summary>
-    TokenColor ResolveColor(Board board, Position jokerPosition);
+    public TokenColor ResolveColor(Board board, Position jokerPosition);
 
     /// <summary>
     /// Expands a cluster by including valid joker substitutions.
     /// </summary>
-    IReadOnlySet<Position> ExpandClusterWithJokers(
+    public IReadOnlySet<Position> ExpandClusterWithJokers(
         Board board,
         IReadOnlySet<Position> baseCluster);
 }

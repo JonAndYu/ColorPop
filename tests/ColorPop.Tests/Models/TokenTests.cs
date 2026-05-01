@@ -1,6 +1,6 @@
-using FluentAssertions;
 using ColorPop.Core.Enums;
 using ColorPop.Core.Models;
+using FluentAssertions;
 
 namespace ColorPop.Tests.Models;
 

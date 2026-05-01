@@ -1,4 +1,4 @@
-﻿using ColorPop.Core.Models;
+using ColorPop.Core.Models;
 
 namespace ColorPop.Core.Abstractions;
 
@@ -14,5 +14,5 @@ public interface IGameEngine
     /// <summary>
     /// Applies a move and returns the next immutable game state.
     /// </summary>
-    GameState ApplyMove(GameState state, Move move);
+    public GameState ApplyMove(GameState state, Move move);
 }

@@ -1,4 +1,4 @@
-﻿namespace ColorPop.Core.Models;
+namespace ColorPop.Core.Models;
 
 /// <summary>
 /// Defines configuration rules for a single game instance.

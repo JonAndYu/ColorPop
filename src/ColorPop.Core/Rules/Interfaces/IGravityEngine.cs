@@ -1,4 +1,4 @@
-﻿using ColorPop.Core.Models;
+using ColorPop.Core.Models;
 
 namespace ColorPop.Core.Interfaces;
 
@@ -14,5 +14,5 @@ public interface IGravityEngine
     /// <summary>
     /// Applies gravity to the board and returns a new board state.
     /// </summary>
-    Board ApplyGravity(Board board);
+    public Board ApplyGravity(Board board);
 }

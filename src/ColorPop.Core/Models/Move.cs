@@ -1,4 +1,4 @@
-﻿using ColorPop.Core.Models;
+using ColorPop.Core.Models;
 
 namespace ColorPop.Core.Models;
 

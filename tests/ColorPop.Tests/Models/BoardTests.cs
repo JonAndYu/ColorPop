@@ -23,7 +23,7 @@ public class BoardTests
     {
         // Arrange
         var board = CreateBoard(10);
-        
+
         // Act
         var updated = board.WithCell(new Position(0, 0), new Token(TokenColor.Yellow));
 

@@ -1,4 +1,4 @@
-﻿namespace ColorPop.Core.Utilities;
+namespace ColorPop.Core.Utilities;
 
 /// <summary>
 /// Provides deterministic random values based on a seed.

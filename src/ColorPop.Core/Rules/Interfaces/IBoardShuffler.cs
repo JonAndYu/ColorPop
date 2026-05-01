@@ -1,4 +1,4 @@
-﻿using ColorPop.Core.Models;
+using ColorPop.Core.Models;
 
 namespace ColorPop.Core.Interfaces;
 
@@ -14,10 +14,10 @@ public interface IBoardShuffler
     /// <summary>
     /// Shuffles an existing board using a seed for deterministic output.
     /// </summary>
-    Board Shuffle(Board board, int seed);
+    public Board Shuffle(Board board, int seed);
 
     /// <summary>
     /// Generates a new starting board based on game settings.
     /// </summary>
-    Board GenerateInitialBoard(int seed, GameSettings settings);
+    public Board GenerateInitialBoard(int seed, GameSettings settings);
 }

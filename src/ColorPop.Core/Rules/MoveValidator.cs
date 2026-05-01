@@ -1,6 +1,6 @@
-﻿using ColorPop.Core.Interfaces;
-using ColorPop.Core.Models;
 using System.ComponentModel.DataAnnotations;
+using ColorPop.Core.Interfaces;
+using ColorPop.Core.Models;
 
 namespace ColorPop.Core.Rules;
 
