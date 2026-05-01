@@ -2,7 +2,6 @@ root = true
 
 [*]
 charset = utf-8
-end_of_line = crlf
 insert_final_newline = true
 trim_trailing_whitespace = true
 indent_style = space
@@ -17,12 +16,12 @@ indent_size = 4
 dotnet_sort_system_directives_first = true
 dotnet_separate_import_directive_groups = false
 
-# var — prefer where type is apparent, allow elsewhere
+# var ï¿½ prefer where type is apparent, allow elsewhere
 csharp_style_var_for_built_in_types = false:suggestion
 csharp_style_var_when_type_is_apparent = true:suggestion
 csharp_style_var_elsewhere = true:suggestion
 
-# Braces — Allman (opening brace on its own line)
+# Braces ï¿½ Allman (opening brace on its own line)
 csharp_new_line_before_open_brace = all
 csharp_new_line_before_else = true
 csharp_new_line_before_catch = true
@@ -48,7 +47,7 @@ csharp_space_before_colon_in_inheritance_clause = true
 csharp_space_after_colon_in_inheritance_clause = true
 csharp_space_around_binary_operators = before_and_after
 
-# Wrapping — never collapse blocks that have statements
+# Wrapping ï¿½ never collapse blocks that have statements
 csharp_preserve_single_line_statements = false
 csharp_preserve_single_line_blocks = true
 
@@ -77,7 +76,7 @@ csharp_style_pattern_matching_over_as_with_null_check = true:suggestion
 csharp_style_throw_expression = true:suggestion
 csharp_style_conditional_delegate_call = true:suggestion
 
-# Naming — private fields must be _camelCase
+# Naming ï¿½ private fields must be _camelCase
 dotnet_naming_rule.private_fields_underscore_camel.severity = warning
 dotnet_naming_rule.private_fields_underscore_camel.symbols = private_fields
 dotnet_naming_rule.private_fields_underscore_camel.style = underscore_camel_case_style
@@ -95,7 +94,7 @@ dotnet_naming_style.underscore_camel_case_style.required_prefix = _
 indent_size = 2
 
 # -----------------------------------------------
-# Markdown — preserve intentional trailing spaces
+# Markdown ï¿½ preserve intentional trailing spaces
 # -----------------------------------------------
 [*.md]
 trim_trailing_whitespace = false
