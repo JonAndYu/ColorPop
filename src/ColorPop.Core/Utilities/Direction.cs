@@ -1,4 +1,4 @@
-﻿namespace ColorPop.Core.Utilities;
+namespace ColorPop.Core.Utilities;
 
 /// <summary>
 /// Represents a directional offset on a grid.

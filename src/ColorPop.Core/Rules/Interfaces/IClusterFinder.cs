@@ -1,4 +1,4 @@
-﻿using ColorPop.Core.Enums;
+using ColorPop.Core.Enums;
 using ColorPop.Core.Models;
 
 namespace ColorPop.Core.Interfaces;
@@ -15,17 +15,17 @@ public interface IClusterFinder
     /// <summary>
     /// Finds a connected cluster starting from a position.
     /// </summary>
-    IReadOnlySet<Position> FindCluster(Board board, Position start);
+    public IReadOnlySet<Position> FindCluster(Board board, Position start);
 
     /// <summary>
     /// Finds a cluster using an explicit target color.
     /// Useful for joker resolution or override logic.
     /// </summary>
-    IReadOnlySet<Position> FindCluster(Board board, Position start, TokenColor color);
+    public IReadOnlySet<Position> FindCluster(Board board, Position start, TokenColor color);
 
     /// <summary>
     /// Finds all valid clusters on the board.
     /// Useful for detecting end-game conditions.
     /// </summary>
-    IEnumerable<IReadOnlySet<Position>> FindAllClusters(Board board);
+    public IEnumerable<IReadOnlySet<Position>> FindAllClusters(Board board);
 }

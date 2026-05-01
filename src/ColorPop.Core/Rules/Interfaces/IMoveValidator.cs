@@ -1,5 +1,5 @@
-﻿using ColorPop.Core.Models;
 using System.ComponentModel.DataAnnotations;
+using ColorPop.Core.Models;
 
 namespace ColorPop.Core.Interfaces;
 
@@ -17,11 +17,11 @@ public interface IMoveValidator
     /// <summary>
     /// Returns true if the move is valid under current game rules.
     /// </summary>
-    bool IsValid(GameState state, Move move);
+    public bool IsValid(GameState state, Move move);
 
     /// <summary>
     /// Performs a detailed validation and returns reasons for failure.
     /// Useful for UI feedback and debugging.
     /// </summary>
-    ValidationResult Validate(GameState state, Move move);
+    public ValidationResult Validate(GameState state, Move move);
 }

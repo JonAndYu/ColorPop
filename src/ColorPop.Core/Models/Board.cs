@@ -1,4 +1,4 @@
-﻿using ColorPop.Core.Enums;
+using ColorPop.Core.Enums;
 using ColorPop.Core.Models;
 
 namespace ColorPop.Core.Models;
@@ -45,14 +45,22 @@ public sealed class Board
     /// <summary>
     /// Gets the token at a specific position.
     /// </summary>
-    public Token Get(Position position)
-        => _cells[position.Row, position.Col];
+    public Token GetToken(Position position)
+    {
+        if (!IsInBounds(position))
+            throw new ArgumentOutOfRangeException(nameof(position), position, "Position is outside the board.");
+
+        return _cells[position.Row, position.Col];
+    }
 
     /// <summary>
     /// Returns a new Board with a single cell updated.
     /// </summary>
-    public Board WithCell(Position position, Token token)
+    public Board UpdateCell(Position position, Token token)
     {
+        if (!IsInBounds(position))
+            throw new ArgumentOutOfRangeException(nameof(position), position, "Position is outside the board.");
+
         var copy = (Token[,])_cells.Clone();
         copy[position.Row, position.Col] = token;
         return new Board(copy);
@@ -67,6 +75,9 @@ public sealed class Board
 
         foreach (var pos in positions)
         {
+            if (!IsInBounds(pos))
+                throw new ArgumentOutOfRangeException(nameof(positions), pos, "One or more positions are out of bounds.");
+
             board = board.RemoveCell(pos);
         }
 
@@ -101,5 +112,5 @@ public sealed class Board
     /// Removes a token from the board (sets it to empty/air).
     /// </summary>
     private Board RemoveCell(Position position)
-        => WithCell(position, Token.Empty);
+        => UpdateCell(position, Token.Empty);
 }

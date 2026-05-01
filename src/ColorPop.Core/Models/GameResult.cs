@@ -1,4 +1,4 @@
-﻿namespace ColorPop.Core.Models;
+namespace ColorPop.Core.Models;
 
 /// <summary>
 /// Represents the final outcome of a completed game.

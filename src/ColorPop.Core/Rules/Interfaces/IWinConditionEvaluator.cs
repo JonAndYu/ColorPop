@@ -1,4 +1,4 @@
-﻿using ColorPop.Core.Models;
+using ColorPop.Core.Models;
 
 namespace ColorPop.Core.Interfaces;
 
@@ -16,15 +16,15 @@ public interface IWinConditionEvaluator
     /// <summary>
     /// Returns true if the game is finished.
     /// </summary>
-    bool IsGameOver(GameState state);
+    public bool IsGameOver(GameState state);
 
     /// <summary>
     /// Returns the winning player, or null if no winner yet or draw.
     /// </summary>
-    Player? GetWinner(GameState state);
+    public Player? GetWinner(GameState state);
 
     /// <summary>
     /// Returns a full evaluation of the game result.
     /// </summary>
-    GameResult Evaluate(GameState state);
+    public GameResult Evaluate(GameState state);
 }

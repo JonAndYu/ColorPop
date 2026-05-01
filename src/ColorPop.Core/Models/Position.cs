@@ -1,4 +1,4 @@
-﻿namespace ColorPop.Core.Models;
+namespace ColorPop.Core.Models;
 
 /// <summary>
 /// Represents a coordinate on the game board.

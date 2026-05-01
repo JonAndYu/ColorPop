@@ -1,4 +1,4 @@
-﻿using ColorPop.Core.Enums;
+using ColorPop.Core.Enums;
 
 namespace ColorPop.Core.Models;
 

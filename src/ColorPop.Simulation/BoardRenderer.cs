@@ -1,10 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ColorPop.Simulation
+namespace ColorPop.Simulation;
+
+internal class BoardRenderer
 {
-    internal class BoardRenderer
-    {
-    }
 }

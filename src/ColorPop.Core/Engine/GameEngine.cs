@@ -1,4 +1,4 @@
-﻿using ColorPop.Core.Abstractions;
+using ColorPop.Core.Abstractions;
 using ColorPop.Core.Enums;
 using ColorPop.Core.Interfaces;
 using ColorPop.Core.Models;
@@ -62,13 +62,13 @@ public sealed class GameEngine : IGameEngine
                 var capturedCount = resolvedCluster
                     .Count(pos =>
                     {
-                        var token = state.Board.Get(pos);
+                        var token = state.Board.GetToken(pos);
                         return p.SecretColors.Contains(token.Color);
                     });
 
                 for (int i = 0; i < capturedCount; i++)
                 {
-                    p = p.AddCaptured(state.Board.Get(resolvedCluster.First()).Color);
+                    p = p.AddCaptured(state.Board.GetToken(resolvedCluster.First()).Color);
                 }
 
                 return p;

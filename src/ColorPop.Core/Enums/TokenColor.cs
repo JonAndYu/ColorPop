@@ -1,13 +1,12 @@
-﻿namespace ColorPop.Core.Enums
+namespace ColorPop.Core.Enums;
+
+public enum TokenColor
 {
-    public enum TokenColor
-    {
-        Empty,
-        Yellow,
-        Green,
-        Pink,
-        Orange,
-        Blue,
-        Joker
-    }
+    Empty,
+    Yellow,
+    Green,
+    Pink,
+    Orange,
+    Blue,
+    Joker
 }

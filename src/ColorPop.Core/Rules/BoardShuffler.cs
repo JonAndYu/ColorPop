@@ -1,4 +1,4 @@
-﻿using ColorPop.Core.Enums;
+using ColorPop.Core.Enums;
 using ColorPop.Core.Interfaces;
 using ColorPop.Core.Models;
 using ColorPop.Core.Utilities;
@@ -52,7 +52,7 @@ public sealed class BoardShuffler : IBoardShuffler
 
         // extract tokens in shuffled order
         var tokens = positions
-            .Select(board.Get)
+            .Select(board.GetToken)
             .ToList();
 
         var newGrid = new Token[size, size];
