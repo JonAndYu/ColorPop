@@ -20,4 +20,10 @@
   <Folder Name="/tests/">
     <Project Path="tests/ColorPop.Tests/ColorPop.Tests.csproj" />
   </Folder>
+  <Folder Name="/workflows/">
+    <File Path=".github/workflows/coverage.yml" />
+    <File Path=".github/workflows/dependency-review.yml" />
+    <File Path=".github/workflows/deploy.yml" />
+    <File Path=".github/workflows/format.yml" />
+  </Folder>
 </Solution>
