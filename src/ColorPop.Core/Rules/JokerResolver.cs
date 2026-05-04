@@ -7,13 +7,13 @@ namespace ColorPop.Core.Rules;
 
 public class JokerResolver : IJokerResolver
 {
-    private static readonly IReadOnlyList<Direction> Directions = Direction.All;
+    private static readonly IReadOnlyList<Direction> _directions = Direction.All;
 
     public TokenColor ResolveColor(Board board, Position jokerPosition)
     {
         var colorCounts = new Dictionary<TokenColor, int>();
 
-        foreach (var dir in Directions)
+        foreach (var dir in _directions)
         {
             var neighbor = new Position(
                 jokerPosition.Row + dir.RowDelta,
@@ -51,7 +51,7 @@ public class JokerResolver : IJokerResolver
         {
             var current = queue.Dequeue();
 
-            foreach (var dir in Directions)
+            foreach (var dir in _directions)
             {
                 var neighbor = new Position(
                     current.Row + dir.RowDelta,
