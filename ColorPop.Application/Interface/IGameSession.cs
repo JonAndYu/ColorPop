@@ -4,9 +4,9 @@ namespace ColorPop.Application.Interface;
 
 public interface IGameSession
 {
-    GameState State { get; }
+    public GameState State { get; }
 
-    event Action? OnChange;
+    public event Action? OnChange;
 
-    void PlayMove(Move move);
+    public void PlayMove(Move move);
 }

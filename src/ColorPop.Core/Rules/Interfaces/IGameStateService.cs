@@ -7,20 +7,20 @@ public interface IGameStateService
     /// <summary>
     /// Current immutable game state snapshot.
     /// </summary>
-    GameState State { get; }
+    public GameState State { get; }
 
     /// <summary>
     /// Fired whenever the state changes (used to trigger UI refresh).
     /// </summary>
-    event Action? OnChange;
+    public event Action? OnChange;
 
     /// <summary>
     /// Executes a move through the game engine and updates state.
     /// </summary>
-    void PlayMove(Move move);
+    public void PlayMove(Move move);
 
     /// <summary>
     /// Resets the game to a fresh state using a seed.
     /// </summary>
-    void Reset(int seed);
+    public void Reset(int seed);
 }
