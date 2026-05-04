@@ -2,9 +2,6 @@
 @using ColorPop.Core.Enums
 
 <div class="board">
-<p>Board exists: @(Session?.State?.Board is not null)</p>
-<p>Rows: @(Session?.State?.Board?.Rows)</p>
-<p>Cols: @(Session?.State?.Board?.Cols)</p>
     @if (Session?.State?.Board is not null)
     {
         <table class="board-table">
@@ -14,10 +11,12 @@
                     @for (int c = 0; c < Session.State.Board.Cols; c++)
                     {
                         var pos = new Position(r, c);
-                        var token = Session.State.Board.GetToken(pos);
+                        var displayToken = GetDisplayToken(pos);
+                        var animClass = GetAnimClass(pos);
 
-                        <td class="cell @GetCellClass(token) @GetAnimationClass(pos, token)"
+                        <td class="cell @GetCollapseClass(pos.Col)"
                             @onclick="() => OnCellClicked(pos)">
+                            <div class="token @GetTokenColorClass(displayToken) @animClass"></div>
                         </td>
                     }
                 </tr>
