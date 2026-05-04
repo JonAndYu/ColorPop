@@ -1,0 +1,41 @@
+/* /Components/Board/BoardView.razor.rz.scp.css */
+.board-table[b-tshhqryhst] {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+.cell[b-tshhqryhst] {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+/* Colors */
+.blue[b-tshhqryhst] {
+    background: #3498db;
+}
+
+.green[b-tshhqryhst] {
+    background: #2ecc71;
+}
+
+.yellow[b-tshhqryhst] {
+    background: #f1c40f;
+}
+
+.pink[b-tshhqryhst] {
+    background: #e91e63;
+}
+
+.orange[b-tshhqryhst] {
+    background: #e67e22;
+}
+
+.joker[b-tshhqryhst] {
+    background: linear-gradient(45deg, red, blue, green);
+}
+
+.empty[b-tshhqryhst] {
+    background: #f5f5f5;
+}
