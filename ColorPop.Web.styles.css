@@ -9,6 +9,13 @@
     height: 35px;
     border: 1px solid #ddd;
     cursor: pointer;
+    padding: 0;
+}
+
+/* Inner token — fills the cell and is the target of all animations */
+.token[b-tshhqryhst] {
+    width: 100%;
+    height: 100%;
 }
 
 /* Colors */
@@ -39,3 +46,36 @@
 .empty[b-tshhqryhst] {
     background: #f5f5f5;
 }
+
+/* Removed cluster — compresses to nothing in both axes */
+@keyframes token-compress-b-tshhqryhst {
+    0%   { transform: scale(1);    opacity: 1; }
+    100% { transform: scale(0, 0); opacity: 0; }
+}
+
+/* Falling token — drops in from above */
+@keyframes token-drop-b-tshhqryhst {
+    0%   { transform: translateY(-35px); opacity: 0; }
+    100% { transform: translateY(0);     opacity: 1; }
+}
+
+/* Empty column — cell collapses to zero width, shifting columns left */
+@keyframes cell-collapse-b-tshhqryhst {
+    0%   { width: 35px; border-left-width: 1px; border-right-width: 1px; }
+    100% { width: 0;    border-left-width: 0;   border-right-width: 0;   }
+}
+
+.token-compress[b-tshhqryhst] {
+    animation: token-compress-b-tshhqryhst 0.5s ease-in forwards;
+}
+
+.token-drop[b-tshhqryhst] {
+    animation: token-drop-b-tshhqryhst 0.5s ease-out forwards;
+}
+
+.cell-collapsing[b-tshhqryhst] {
+    animation: cell-collapse-b-tshhqryhst 0.4s ease-in-out forwards;
+    overflow: hidden;
+    padding: 0;
+}
+
