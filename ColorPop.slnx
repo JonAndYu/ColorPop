@@ -8,8 +8,10 @@
     <File Path="global.json" />
   </Folder>
   <Folder Name="/src/">
+    <Project Path="ColorPop.Application/ColorPop.Application.csproj" />
     <Project Path="src/ColorPop.Core/ColorPop.Core.csproj" />
     <Project Path="src/ColorPop.Simulation/ColorPop.Simulation.csproj" />
+    <Project Path="src/ColorPop.Web/ColorPop.Web.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/ColorPop.Tests/ColorPop.Tests.csproj" />

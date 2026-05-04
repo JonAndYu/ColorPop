@@ -1,3 +1,5 @@
+using ColorPop.Application;
+using ColorPop.Application.Interface;
 using ColorPop.Core.Abstractions;
 using ColorPop.Core.Enums;
 using ColorPop.Core.Models;
@@ -6,16 +8,16 @@ namespace ColorPop.Simulation;
 
 public sealed class GameSimulator
 {
-    private readonly IGameEngine _gameEngine;
+    private readonly IGameSession _session;
     private readonly ICommandParser _parser;
     private readonly IBoardRenderer _renderer;
 
     public GameSimulator(
-        IGameEngine gameEngine,
+        IGameSession session,
         ICommandParser parser,
         IBoardRenderer renderer)
     {
-        _gameEngine = gameEngine;
+        _session = session;
         _parser = parser;
         _renderer = renderer;
     }
@@ -25,44 +27,39 @@ public sealed class GameSimulator
     /// </summary>
     public void Run(GameState initialState)
     {
-        var state = initialState;
+        // Session already owns state, so we sync once
+        var state = _session.State;
 
         while (state.Status == GameStatus.InProgress)
         {
             Console.Clear();
 
-            // 1. Render board
             _renderer.Render(state.Board);
 
-            // 2. Show player turn
             Console.WriteLine($"Player {state.CurrentPlayer.Name}'s turn");
             Console.WriteLine("Enter move (row col):");
 
-            // 3. Read input
             var input = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(input))
                 continue;
 
-            // 4. Parse move
-            Move move;
-
             try
             {
-                move = _parser.Parse(input, state.CurrentPlayer.Id);
+                var move = _parser.Parse(input, state.CurrentPlayer.Id);
+
+                // ✔ THIS is the key change
+                _session.PlayMove(move);
+
+                state = _session.State;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Invalid move: {ex.Message}");
                 Console.ReadKey();
-                continue;
             }
-
-            // 5. Execute game logic
-            state = _gameEngine.ApplyMove(state, move);
         }
 
-        // Final render
         Console.Clear();
         _renderer.Render(state.Board);
 

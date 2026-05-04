@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ColorPop.Application\ColorPop.Application.csproj" />
     <ProjectReference Include="..\ColorPop.Core\ColorPop.Core.csproj" />
   </ItemGroup>
 
