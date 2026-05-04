@@ -1,0 +1,26 @@
+@using ColorPop.Application.Interface
+@using ColorPop.Web.Components.Board
+
+@page "/game"
+@inject IGameSession Session
+
+@implements IDisposable
+
+<h3>ColorPop</h3>
+
+<p>Turn: @Session.State.TurnNumber</p>
+<p>Player: @Session.State.CurrentPlayer.Name</p>
+
+<BoardView Session="Session" />
+
+@code {
+    protected override void OnInitialized()
+    {
+        Session.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        Session.OnChange -= StateHasChanged;
+    }
+}

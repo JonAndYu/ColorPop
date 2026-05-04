@@ -1,0 +1,10 @@
+@page "/"
+
+@code {
+    [Inject] private NavigationManager Nav { get; set; } = default!;
+
+    protected override void OnInitialized()
+    {
+        Nav.NavigateTo("/game", true);
+    }
+}

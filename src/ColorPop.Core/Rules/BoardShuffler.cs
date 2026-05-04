@@ -10,6 +10,7 @@ namespace ColorPop.Core.Services;
 /// </summary>
 public sealed class BoardShuffler : IBoardShuffler
 {
+    // TODO: The board should be equal amount of each color. This is just a quick implementation to get something working.
     public Board GenerateInitialBoard(int seed, GameSettings settings)
     {
         var random = new RandomProvider(seed);
@@ -78,6 +79,7 @@ public sealed class BoardShuffler : IBoardShuffler
             TokenColor.Yellow,
             TokenColor.Pink,
             TokenColor.Orange,
+            TokenColor.Joker,
         };
     }
 }

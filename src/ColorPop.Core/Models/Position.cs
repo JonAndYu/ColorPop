@@ -1,3 +1,5 @@
+using ColorPop.Core.Utilities;
+
 namespace ColorPop.Core.Models;
 
 /// <summary>
@@ -27,4 +29,13 @@ public readonly record struct Position(int Row, int Col)
     /// </summary>
     public Position Offset(Position delta)
         => new(Row + delta.Row, Col + delta.Col);
+
+    /// <summary>
+    /// Adds a direction as a vector offset
+    /// </summary>
+    public Position Offset(Direction dir)
+    {
+        var (dRow, dCol) = (dir.RowDelta, dir.ColDelta);
+        return new Position(Row + dRow, Col + dCol);
+    }
 }

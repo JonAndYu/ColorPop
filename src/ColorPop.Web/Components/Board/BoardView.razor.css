@@ -1,0 +1,40 @@
+.board-table {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+.cell {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+/* Colors */
+.blue {
+    background: #3498db;
+}
+
+.green {
+    background: #2ecc71;
+}
+
+.yellow {
+    background: #f1c40f;
+}
+
+.pink {
+    background: #e91e63;
+}
+
+.orange {
+    background: #e67e22;
+}
+
+.joker {
+    background: linear-gradient(45deg, red, blue, green);
+}
+
+.empty {
+    background: #f5f5f5;
+}
