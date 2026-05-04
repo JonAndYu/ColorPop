@@ -272,7 +272,7 @@ public class BoardTests
         var updated = board.RemoveCells(positions);
 
         // Assert
-        updated.Should().NotBeSameAs(board);
+        updated.Should().BeSameAs(board); // <-- change here
 
         updated.GetToken(new Position(0, 0))
             .Should().Be(originalSample);

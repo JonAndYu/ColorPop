@@ -16,7 +16,7 @@ namespace ColorPop.Core.Rules;
 ///
 /// Uses flood-fill (BFS) for deterministic and stack-safe traversal.
 /// </remarks>
-internal sealed class ClusterFinder : IClusterFinder
+public sealed class ClusterFinder : IClusterFinder
 {
     /// <summary>
     /// Finds all clusters present on the board.
