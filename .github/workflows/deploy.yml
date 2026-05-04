@@ -21,7 +21,10 @@ jobs:
       - name: Publish
         run: dotnet publish src/ColorPop.Web/ColorPop.Web.csproj -c Release -o publish
 
-      - name: Copy 404.html
+      - name: Fix base href for GitHub Pages
+        run: sed -i 's|<base href="/" />|<base href="/ColorPop/" />|g' publish/wwwroot/index.html
+
+      - name: Copy index.html to 404.html
         run: cp publish/wwwroot/index.html publish/wwwroot/404.html
 
       - name: Add .nojekyll

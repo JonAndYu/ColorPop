@@ -2,6 +2,33 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+/* Seed MudBlazor's primary colour before MudThemeProvider renders
+   so the loading bar has the correct colour immediately */
+:root {
+    --mud-palette-primary: #594AE2;
+}
+
+.loading-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 24px;
+}
+
+.loading-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    color: var(--mud-palette-primary);
+    margin: 0;
+    letter-spacing: 0.05em;
+}
+
+.loading-progress-bar {
+    width: 320px;
+}
+
 h1:focus {
     outline: none;
 }
