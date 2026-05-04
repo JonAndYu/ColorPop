@@ -2,7 +2,6 @@
 @using ColorPop.Core.Enums
 
 <div class="board">
-    <p>Session exists: @(Session is not null)</p>
 <p>Board exists: @(Session?.State?.Board is not null)</p>
 <p>Rows: @(Session?.State?.Board?.Rows)</p>
 <p>Cols: @(Session?.State?.Board?.Cols)</p>
@@ -17,7 +16,7 @@
                         var pos = new Position(r, c);
                         var token = Session.State.Board.GetToken(pos);
 
-                        <td class="cell @GetCellClass(token)"
+                        <td class="cell @GetCellClass(token) @GetAnimationClass(pos, token)"
                             @onclick="() => OnCellClicked(pos)">
                         </td>
                     }

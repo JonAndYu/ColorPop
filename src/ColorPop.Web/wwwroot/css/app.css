@@ -113,3 +113,39 @@ code {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
     text-align: start;
 }
+
+.cell {
+    width: 40px;
+    height: 40px;
+    transition: transform 3s ease, opacity 0.3s ease;
+}
+
+.cell.drop {
+     animation: dropAnim 3s ease;
+}
+
+@keyframes dropAnim {
+    from {
+        transform: translateY(-30px);
+        opacity: 0.5;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.cell.shift {
+    animation: shiftAnim 3s ease;
+}
+
+@keyframes shiftAnim {
+    from {
+        transform: translateX(20px);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}

@@ -6,10 +6,22 @@ using Microsoft.AspNetCore.Components;
 
 namespace ColorPop.Web.Components.Board;
 
-public partial class BoardView
+public partial class BoardView : ComponentBase, IDisposable
 {
 
     [Parameter] public IGameSession Session { get; set; } = default!;
+
+    private ColorPop.Core.Models.Board? _previousBoard;
+    public void Dispose()
+    {
+        Session.OnChange -= HandleStateChanged;
+    }
+
+
+    protected override void OnInitialized()
+    {
+        Session.OnChange += HandleStateChanged;
+    }
 
     private void OnCellClicked(Position pos)
     {
@@ -30,5 +42,27 @@ public partial class BoardView
             TokenColor.Joker => "joker",
             _ => "empty"
         };
+    }
+
+    private void HandleStateChanged()
+    {
+        _previousBoard = Session.State.Board;
+        InvokeAsync(StateHasChanged);
+    }
+
+    private string GetAnimationClass(Position pos, Token current)
+    {
+        if (_previousBoard == null)
+            return "";
+
+        var prevToken = _previousBoard.GetToken(pos);
+
+        if (prevToken.Color == current.Color)
+            return "";
+
+        if (!current.IsEmpty)
+            return "drop shift";
+
+        return "";
     }
 }
