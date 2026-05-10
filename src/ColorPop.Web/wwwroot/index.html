@@ -18,12 +18,21 @@
 <body>
     <div id="app">
         <div class="loading-screen">
-            <p class="loading-title">ColorPop</p>
-            <div class="mud-progress-linear mud-progress-linear-color-primary mud-progress-indeterminate loading-progress-bar"
-                 role="progressbar">
-                <div class="mud-progress-linear-bars">
-                    <div class="mud-progress-linear-bar mud-progress-linear-bar1 mud-progress-indeterminate"></div>
-                    <div class="mud-progress-linear-bar mud-progress-linear-bar2 mud-progress-indeterminate"></div>
+            <div class="loading-panel" aria-live="polite">
+                <div class="loading-mark" aria-hidden="true">
+                    <span class="loading-token loading-token-blue"></span>
+                    <span class="loading-token loading-token-green"></span>
+                    <span class="loading-token loading-token-yellow"></span>
+                    <span class="loading-token loading-token-pink"></span>
+                </div>
+
+                <div class="loading-copy">
+                    <p class="loading-title">ColorPop</p>
+                    <p class="loading-subtitle">Preparing your board</p>
+                </div>
+
+                <div class="loading-progress-bar" role="progressbar" aria-label="Loading ColorPop">
+                    <span></span>
                 </div>
             </div>
         </div>

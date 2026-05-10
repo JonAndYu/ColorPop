@@ -11,6 +11,6 @@ public partial class Index : ComponentBase
 
     private void PracticeButton_OnClick()
     {
-        NavigationManager.NavigateTo("/game");
+        NavigationManager.NavigateTo("game");
     }
 }
