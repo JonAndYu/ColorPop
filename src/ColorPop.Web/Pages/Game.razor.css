@@ -1,4 +1,6 @@
 .game-page {
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
     background-color: #121212;
     color: white;
@@ -6,6 +8,30 @@
 
 .game-page ::deep .mud-typography {
     color: white;
+}
+
+.game-page ::deep .game-appbar {
+    position: static !important;
+    flex: 0 0 auto;
+    background-color: #1e1e1e;
+    border-bottom: 1px solid #3a3a3a;
+}
+
+.game-page ::deep .game-appbar-title {
+    font-size: 2.4rem;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0;
+    text-shadow: 2px 2px 0 #6366F1, 4px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.game-page ::deep .game-appbar-status {
+    color: rgba(255, 255, 255, 0.82);
+    font-weight: 600;
+}
+
+.game-page ::deep .game-content {
+    padding-top: 24px;
 }
 
 .game-layout {

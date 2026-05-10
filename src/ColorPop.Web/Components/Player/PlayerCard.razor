@@ -2,23 +2,46 @@
 
 <div class="player-card-shell">
     <MudCard Outlined="true" Class="player-card pa-4">
-        <MudCardContent>
-            <div class="profile-header">
-                <MudAvatar Size="Size.Large">
-                    <img src="https://i.pravatar.cc/100" alt="Player avatar" />
-                </MudAvatar>
+        <div class="@ContentClass">
+            <MudCardContent>
+                <div class="profile-header">
+                    <MudAvatar Size="Size.Large">
+                        <img src="https://i.pravatar.cc/100" alt="Player avatar" />
+                    </MudAvatar>
 
-                <MudText Typo="Typo.h6">
-                    User Name
+                    <MudText Typo="Typo.h6">
+                        User Name
+                    </MudText>
+                </div>
+            </MudCardContent>
+
+            <MudCardContent>
+                <div class="color-chart" aria-label="Captured groups by color">
+                    @foreach (var group in _colorGroups)
+                    {
+                        <div class="color-chart-item"
+                             title="@($"{group.Label}: {group.Count}")">
+                            <div class="color-chart-track">
+                                <div class="color-chart-bar"
+                                     style="@GetBarStyle(group)">
+                                    <span>@group.Count</span>
+                                </div>
+                            </div>
+
+                            <span class="color-chart-label">@group.Label</span>
+                        </div>
+                    }
+                </div>
+            </MudCardContent>
+        </div>
+
+        @if (!IsInitialized)
+        {
+            <div class="player-card-waiting" role="status">
+                <MudText Typo="Typo.subtitle1">
+                    Waiting for Player to Join...
                 </MudText>
             </div>
-        </MudCardContent>
-
-        <MudCardContent>
-            <MudChart ChartType="ChartType.Bar"
-                      InputLabels="@_labels"
-                      ChartSeries="@_series"
-                      Height="220px" />
-        </MudCardContent>
+        }
     </MudCard>
 </div>

@@ -9,7 +9,7 @@ namespace ColorPop.Web.Components.Board;
 
 public partial class BoardView : ComponentBase, IDisposable
 {
-    private const int CellSizePx = 50;
+    private const int CellSizePx = 55;
 
     [Parameter] public IGameSession Session { get; set; } = default!;
 
@@ -19,6 +19,7 @@ public partial class BoardView : ComponentBase, IDisposable
     private HashSet<Position> _removedPositions = [];
     private HashSet<Position> _droppingPositions = [];
     private Dictionary<Position, int> _shiftingPositions = [];
+    private static string BoardStyle => $"--board-cell-size: {CellSizePx}px;";
 
     protected override void OnInitialized()
     {
@@ -41,7 +42,8 @@ public partial class BoardView : ComponentBase, IDisposable
         Session.PlayMove(new Move(Session.State.CurrentPlayer.Id, pos));
 
         _removedPositions = GetRemovedPositions(_previousBoard, Session.State.Board);
-        _droppingPositions = GetDroppedPositions(_previousBoard, Session.State.Board);
+        var shiftedPositions = GetShiftedPositions(_previousBoard, Session.State.Board, _removedPositions);
+        _droppingPositions = GetDroppedPositions(_previousBoard, Session.State.Board, shiftedPositions.Keys);
         _isAnimating = true;
 
         _suppressStateChange = false;
@@ -53,7 +55,7 @@ public partial class BoardView : ComponentBase, IDisposable
         var removedPositions = _removedPositions;
         _removedPositions = [];
         _droppingPositions = [];
-        _shiftingPositions = GetShiftedPositions(_previousBoard, Session.State.Board, removedPositions);
+        _shiftingPositions = shiftedPositions;
 
         if (_shiftingPositions.Count > 0)
         {
@@ -188,14 +190,22 @@ public partial class BoardView : ComponentBase, IDisposable
         return removed;
     }
 
-    private HashSet<Position> GetDroppedPositions(GameBoard before, GameBoard after)
+    private HashSet<Position> GetDroppedPositions(
+        GameBoard before,
+        GameBoard after,
+        IEnumerable<Position> shiftedPositions)
     {
         var dropped = new HashSet<Position>();
+        var shifted = shiftedPositions.ToHashSet();
 
         for (int r = 0; r < after.Rows; r++)
             for (int c = 0; c < after.Cols; c++)
             {
                 var pos = new Position(r, c);
+
+                if (shifted.Contains(pos))
+                    continue;
+
                 var tokenBefore = before.GetToken(pos);
                 var tokenAfter = after.GetToken(pos);
 

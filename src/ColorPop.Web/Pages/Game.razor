@@ -9,17 +9,19 @@
 @implements IDisposable
 
 <div class="game-page">
-    <MudContainer MaxWidth="MaxWidth.False" Class="pa-4">
-        <MudStack Spacing="3">
-            <div>
-                <MudText Typo="Typo.h4">ColorPop</MudText>
-                <MudText Typo="Typo.body1">Turn: @Session.State.TurnNumber</MudText>
-                <MudText Typo="Typo.body1">Player: @Session.State.CurrentPlayer.Name</MudText>
-            </div>
+    <MudAppBar Elevation="0" Class="game-appbar" Style="position: static;">
+        <MudText Typo="Typo.h5" Class="game-appbar-title">ColorPop</MudText>
+        <MudSpacer />
+        <MudText Typo="Typo.subtitle1" Class="game-appbar-status">
+            Turn: @Session.State.TurnNumber, @Session.State.CurrentPlayer.Name
+        </MudText>
+    </MudAppBar>
 
+    <MudContainer MaxWidth="MaxWidth.False" Class="pa-4">
+        <MudStack Spacing="3" Class="game-content">
             <div class="game-layout">
                 <div class="player-card-column">
-                    <PlayerCard />
+                    <PlayerCard IsInitialized="false" />
                 </div>
 
                 <div class="board-column">

@@ -4,7 +4,7 @@
 <div class="board">
     @if (Session?.State?.Board is not null)
     {
-        <table class="board-table">
+        <table class="board-table" style="@BoardStyle">
             @for (int r = 0; r < Session.State.Board.Rows; r++)
             {
                 <tr>
