@@ -6,16 +6,142 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ColorPop.Web</title>
     <base href="/ColorPop/" />
-    <link href="_framework/dotnet.hrn0t0mi0r.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-TZUP/gLtI1NQR0Auif/w8g3qJPMbv3qrJmCSm46K8to=" />
+    <link href="_framework/dotnet.e8oa57mbub.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-Llrkd875D7VcwZjyt+w3/S+boU5KQZAjeDgsfa3rkG8=" />
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
     <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
     <link href="ColorPop.Web.styles.css" rel="stylesheet" />
+    <style>
+        html,
+        body {
+            min-height: 100%;
+            margin: 0;
+            background: #121212;
+        }
+
+        .loading-screen {
+            display: grid;
+            min-height: 100vh;
+            place-items: center;
+            padding: 24px;
+            background: radial-gradient(circle at 50% 28%, rgba(99, 102, 241, 0.16), transparent 34%), #121212;
+            color: white;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        .loading-panel {
+            display: grid;
+            justify-items: center;
+            gap: 22px;
+            width: min(360px, 100%);
+            padding: 34px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            background: #1e1e1e;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.36);
+        }
+
+        .loading-mark {
+            display: grid;
+            grid-template-columns: repeat(2, 28px);
+            gap: 8px;
+            transform: rotate(45deg);
+        }
+
+        .loading-token {
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
+            animation: loading-token-pulse 1.4s ease-in-out infinite;
+        }
+
+        .loading-token-blue {
+            background: #6366F1;
+        }
+
+        .loading-token-green {
+            background: #2ECC71;
+            animation-delay: 0.12s;
+        }
+
+        .loading-token-yellow {
+            background: #F59E0B;
+            animation-delay: 0.24s;
+        }
+
+        .loading-token-pink {
+            background: #EC4899;
+            animation-delay: 0.36s;
+        }
+
+        .loading-copy {
+            display: grid;
+            gap: 6px;
+            text-align: center;
+        }
+
+        .loading-title {
+            margin: 0;
+            color: white;
+            font-size: 2.4rem;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: 0;
+            text-shadow: 2px 2px 0 #6366F1, 4px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .loading-subtitle {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.68);
+            font-size: 0.95rem;
+        }
+
+        .loading-progress-bar {
+            position: relative;
+            overflow: hidden;
+            width: min(280px, 100%);
+            height: 8px;
+            border-radius: 999px;
+            background: #2d2d2d;
+        }
+
+        .loading-progress-bar span {
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: 45%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #6366F1, #EC4899, #F59E0B);
+            animation: loading-progress-slide 1.2s ease-in-out infinite;
+        }
+
+        @keyframes loading-token-pulse {
+            0%,
+            100% {
+                opacity: 0.58;
+                transform: scale(0.92);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes loading-progress-slide {
+            0% {
+                transform: translateX(-110%);
+            }
+
+            100% {
+                transform: translateX(230%);
+            }
+        }
+    </style>
     <script type="importmap">{
   "imports": {
     "./_framework/blazor.webassembly.js": "./_framework/blazor.webassembly.zxhwjtv6sc.js",
-    "./_framework/dotnet.js": "./_framework/dotnet.hrn0t0mi0r.js",
+    "./_framework/dotnet.js": "./_framework/dotnet.e8oa57mbub.js",
     "./_framework/dotnet.native.js": "./_framework/dotnet.native.ykrnppwhq2.js",
     "./_framework/dotnet.runtime.js": "./_framework/dotnet.runtime.peu2mfb29t.js"
   },
@@ -23,8 +149,8 @@
   "integrity": {
     "./_framework/blazor.webassembly.js": "sha256-1xlHuu1iNOJiMMz2BCq95uekwHf6pdpTcgVNKVBboPs=",
     "./_framework/blazor.webassembly.zxhwjtv6sc.js": "sha256-1xlHuu1iNOJiMMz2BCq95uekwHf6pdpTcgVNKVBboPs=",
-    "./_framework/dotnet.hrn0t0mi0r.js": "sha256-TZUP/gLtI1NQR0Auif/w8g3qJPMbv3qrJmCSm46K8to=",
-    "./_framework/dotnet.js": "sha256-TZUP/gLtI1NQR0Auif/w8g3qJPMbv3qrJmCSm46K8to=",
+    "./_framework/dotnet.e8oa57mbub.js": "sha256-Llrkd875D7VcwZjyt+w3/S+boU5KQZAjeDgsfa3rkG8=",
+    "./_framework/dotnet.js": "sha256-Llrkd875D7VcwZjyt+w3/S+boU5KQZAjeDgsfa3rkG8=",
     "./_framework/dotnet.native.js": "sha256-nheeN4H7Js+avp9nd/sQxdaehbeEx3qriXjiZ3pSw6U=",
     "./_framework/dotnet.native.ykrnppwhq2.js": "sha256-nheeN4H7Js+avp9nd/sQxdaehbeEx3qriXjiZ3pSw6U=",
     "./_framework/dotnet.runtime.js": "sha256-cajUr4vA/MpLPWj3omULUOwEQw3i8CE2n8AmDheqWBM=",
