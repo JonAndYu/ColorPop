@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ColorPop.Web</title>
     <base href="/ColorPop/" />
-    <link href="_framework/dotnet.neaem2h6ng.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-L9qfpq61s+AcYhHeGclLB/HQxSBiTt2gVHJYah2/6wY=" />
+    <link href="_framework/dotnet.hrn0t0mi0r.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-TZUP/gLtI1NQR0Auif/w8g3qJPMbv3qrJmCSm46K8to=" />
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
@@ -15,18 +15,18 @@
     <script type="importmap">{
   "imports": {
     "./_framework/blazor.webassembly.js": "./_framework/blazor.webassembly.zxhwjtv6sc.js",
+    "./_framework/dotnet.js": "./_framework/dotnet.hrn0t0mi0r.js",
     "./_framework/dotnet.native.js": "./_framework/dotnet.native.ykrnppwhq2.js",
-    "./_framework/dotnet.js": "./_framework/dotnet.neaem2h6ng.js",
     "./_framework/dotnet.runtime.js": "./_framework/dotnet.runtime.peu2mfb29t.js"
   },
   "scopes": {},
   "integrity": {
     "./_framework/blazor.webassembly.js": "sha256-1xlHuu1iNOJiMMz2BCq95uekwHf6pdpTcgVNKVBboPs=",
     "./_framework/blazor.webassembly.zxhwjtv6sc.js": "sha256-1xlHuu1iNOJiMMz2BCq95uekwHf6pdpTcgVNKVBboPs=",
-    "./_framework/dotnet.js": "sha256-L9qfpq61s+AcYhHeGclLB/HQxSBiTt2gVHJYah2/6wY=",
+    "./_framework/dotnet.hrn0t0mi0r.js": "sha256-TZUP/gLtI1NQR0Auif/w8g3qJPMbv3qrJmCSm46K8to=",
+    "./_framework/dotnet.js": "sha256-TZUP/gLtI1NQR0Auif/w8g3qJPMbv3qrJmCSm46K8to=",
     "./_framework/dotnet.native.js": "sha256-nheeN4H7Js+avp9nd/sQxdaehbeEx3qriXjiZ3pSw6U=",
     "./_framework/dotnet.native.ykrnppwhq2.js": "sha256-nheeN4H7Js+avp9nd/sQxdaehbeEx3qriXjiZ3pSw6U=",
-    "./_framework/dotnet.neaem2h6ng.js": "sha256-L9qfpq61s+AcYhHeGclLB/HQxSBiTt2gVHJYah2/6wY=",
     "./_framework/dotnet.runtime.js": "sha256-cajUr4vA/MpLPWj3omULUOwEQw3i8CE2n8AmDheqWBM=",
     "./_framework/dotnet.runtime.peu2mfb29t.js": "sha256-cajUr4vA/MpLPWj3omULUOwEQw3i8CE2n8AmDheqWBM="
   }
@@ -36,12 +36,21 @@
 <body>
     <div id="app">
         <div class="loading-screen">
-            <p class="loading-title">ColorPop</p>
-            <div class="mud-progress-linear mud-progress-linear-color-primary mud-progress-indeterminate loading-progress-bar"
-                 role="progressbar">
-                <div class="mud-progress-linear-bars">
-                    <div class="mud-progress-linear-bar mud-progress-linear-bar1 mud-progress-indeterminate"></div>
-                    <div class="mud-progress-linear-bar mud-progress-linear-bar2 mud-progress-indeterminate"></div>
+            <div class="loading-panel" aria-live="polite">
+                <div class="loading-mark" aria-hidden="true">
+                    <span class="loading-token loading-token-blue"></span>
+                    <span class="loading-token loading-token-green"></span>
+                    <span class="loading-token loading-token-yellow"></span>
+                    <span class="loading-token loading-token-pink"></span>
+                </div>
+
+                <div class="loading-copy">
+                    <p class="loading-title">ColorPop</p>
+                    <p class="loading-subtitle">Preparing your board</p>
+                </div>
+
+                <div class="loading-progress-bar" role="progressbar" aria-label="Loading ColorPop">
+                    <span></span>
                 </div>
             </div>
         </div>
