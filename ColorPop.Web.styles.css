@@ -1,21 +1,30 @@
 /* /Components/Board/BoardView.razor.rz.scp.css */
 .board-table[b-tshhqryhst] {
+    --board-cell-size: 50px;
     border-collapse: collapse;
     margin: auto;
 }
 
-.cell[b-tshhqryhst] {
-    width: 35px;
-    height: 35px;
+.board-cell[b-tshhqryhst] {
+    width: var(--board-cell-size);
+    min-width: var(--board-cell-size);
+    max-width: var(--board-cell-size);
+    height: var(--board-cell-size);
+    min-height: var(--board-cell-size);
+    max-height: var(--board-cell-size);
     border: 1px solid #ddd;
+    box-sizing: border-box;
     cursor: pointer;
     padding: 0;
 }
 
 /* Inner token — fills the cell and is the target of all animations */
 .token[b-tshhqryhst] {
+    display: block;
     width: 100%;
     height: 100%;
+    min-width: var(--board-cell-size);
+    min-height: var(--board-cell-size);
 }
 
 /* Colors */
@@ -55,14 +64,14 @@
 
 /* Falling token — drops in from above */
 @keyframes token-drop-b-tshhqryhst {
-    0%   { transform: translateY(-35px); opacity: 0; }
+    0%   { transform: translateY(calc(var(--board-cell-size) * -1)); opacity: 0; }
     100% { transform: translateY(0);     opacity: 1; }
 }
 
-/* Empty column — cell collapses to zero width, shifting columns left */
-@keyframes cell-collapse-b-tshhqryhst {
-    0%   { width: 35px; border-left-width: 1px; border-right-width: 1px; }
-    100% { width: 0;    border-left-width: 0;   border-right-width: 0;   }
+/* Shifted token - moves left while the table remains 10x10 */
+@keyframes token-shift-left-b-tshhqryhst {
+    0%   { transform: translateX(var(--shift-x)); }
+    100% { transform: translateX(0); }
 }
 
 .token-compress[b-tshhqryhst] {
@@ -73,9 +82,141 @@
     animation: token-drop-b-tshhqryhst 0.5s ease-out forwards;
 }
 
-.cell-collapsing[b-tshhqryhst] {
-    animation: cell-collapse-b-tshhqryhst 0.4s ease-in-out forwards;
-    overflow: hidden;
-    padding: 0;
+.token-shift-left[b-tshhqryhst] {
+    animation: token-shift-left-b-tshhqryhst 0.4s ease-in-out forwards;
 }
 
+/* /Components/Player/PlayerCard.razor.rz.scp.css */
+.player-card-shell[b-193wimbp92] {
+    width: 100%;
+    max-width: 400px;
+}
+
+.player-card-shell[b-193wimbp92]  .player-card {
+    background-color: #2d2d2d;
+    border-color: #3a3a3a;
+    color: white;
+}
+
+.player-card-shell[b-193wimbp92]  .mud-card-content {
+    color: white;
+}
+
+.profile-header[b-193wimbp92] {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+/* /Pages/Game.razor.rz.scp.css */
+.game-page[b-qctktttbka] {
+    min-height: 100vh;
+    background-color: #121212;
+    color: white;
+}
+
+.game-page[b-qctktttbka]  .mud-typography {
+    color: white;
+}
+
+.game-layout[b-qctktttbka] {
+    display: grid;
+    grid-template-columns: minmax(260px, 400px) auto minmax(260px, 400px);
+    justify-content: space-evenly;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.player-card-column[b-qctktttbka],
+.board-column[b-qctktttbka] {
+    display: flex;
+    justify-content: center;
+}
+
+.board-column[b-qctktttbka] {
+    min-width: 0;
+}
+
+@media (max-width: 1199.98px) {
+    .game-layout[b-qctktttbka] {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        justify-items: center;
+    }
+
+    .player-card-column[b-qctktttbka],
+    .board-column[b-qctktttbka] {
+        width: 100%;
+    }
+}
+/* /Pages/Index.razor.rz.scp.css */
+.index-page[b-iy3ygmx0n7] {
+    min-height: 100vh;
+}
+
+.index-page[b-iy3ygmx0n7]  .title {
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: white;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0 #6366F1, 4px 4px 10px rgba(0,0,0,0.5);
+}
+
+.index-page[b-iy3ygmx0n7]  .whimsy-btn {
+    border-radius: 999px;
+    padding: 12px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-transform: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+}
+
+.index-page[b-iy3ygmx0n7]  .whimsy-btn.primary {
+    background: linear-gradient(135deg, #6366F1, #8B5CF6);
+    color: white;
+}
+
+.index-page[b-iy3ygmx0n7]  .whimsy-btn.secondary {
+    background: linear-gradient(135deg, #EC4899, #F59E0B);
+    color: white;
+}
+
+.index-page[b-iy3ygmx0n7]  .whimsy-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.code-row[b-iy3ygmx0n7] {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.index-page[b-iy3ygmx0n7]  .code-label {
+    color: white;
+    min-width: 50px;
+}
+
+.index-page[b-iy3ygmx0n7]  .code-input {
+    flex: 1;
+}
+
+.bottom-row[b-iy3ygmx0n7] {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+.index-page[b-iy3ygmx0n7]  .practice-btn {
+    border-radius: 12px;
+    background: #2d2d2d;
+    color: white;
+    padding: 6px 14px;
+    font-weight: 600;
+    text-transform: none;
+    transition: all 0.2s ease;
+}
+
+.index-page[b-iy3ygmx0n7]  .practice-btn:hover {
+    background: #3a3a3a;
+    transform: translateY(-1px);
+}
