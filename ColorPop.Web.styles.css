@@ -1,6 +1,5 @@
 /* /Components/Board/BoardView.razor.rz.scp.css */
 .board-table[b-tshhqryhst] {
-    --board-cell-size: 50px;
     border-collapse: collapse;
     margin: auto;
 }
@@ -41,7 +40,7 @@
 }
 
 .pink[b-tshhqryhst] {
-    background: #e91e63;
+    background: #ff4fb8;
 }
 
 .orange[b-tshhqryhst] {
@@ -64,8 +63,8 @@
 
 /* Falling token — drops in from above */
 @keyframes token-drop-b-tshhqryhst {
-    0%   { transform: translateY(calc(var(--board-cell-size) * -1)); opacity: 0; }
-    100% { transform: translateY(0);     opacity: 1; }
+    0%   { transform: translateY(calc(var(--board-cell-size) * -1)); opacity: 1; }
+    100% { transform: translateY(0); opacity: 1; }
 }
 
 /* Shifted token - moves left while the table remains 10x10 */
@@ -93,6 +92,8 @@
 }
 
 .player-card-shell[b-193wimbp92]  .player-card {
+    position: relative;
+    overflow: hidden;
     background-color: #2d2d2d;
     border-color: #3a3a3a;
     color: white;
@@ -107,8 +108,96 @@
     align-items: center;
     gap: 12px;
 }
+
+.player-card-content[b-193wimbp92] {
+    transition: filter 0.18s ease, opacity 0.18s ease;
+}
+
+.player-card-content.is-waiting[b-193wimbp92] {
+    filter: blur(4px);
+    opacity: 0.42;
+    pointer-events: none;
+    user-select: none;
+}
+
+.player-card-waiting[b-193wimbp92] {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: rgba(18, 18, 18, 0.52);
+    backdrop-filter: blur(1px);
+    text-align: center;
+    z-index: 1;
+}
+
+.player-card-waiting[b-193wimbp92]  .mud-typography {
+    color: white;
+    font-weight: 800;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.color-chart[b-193wimbp92] {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(42px, 1fr));
+    align-items: end;
+    gap: 12px;
+    height: 220px;
+    padding-top: 10px;
+}
+
+.color-chart-item[b-193wimbp92] {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 10px;
+    height: 100%;
+    min-width: 0;
+}
+
+.color-chart-track[b-193wimbp92] {
+    display: flex;
+    align-items: end;
+    min-height: 0;
+    border-radius: 8px;
+    background: #1e1e1e;
+    overflow: hidden;
+}
+
+.color-chart-bar[b-193wimbp92] {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    min-height: 24px;
+    border-radius: 8px 8px 0 0;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+    transition: transform 0.16s ease, filter 0.16s ease;
+}
+
+.color-chart-bar span[b-193wimbp92] {
+    padding-top: 6px;
+}
+
+.color-chart-item:hover .color-chart-bar[b-193wimbp92] {
+    filter: brightness(1.1);
+    transform: translateY(-3px);
+}
+
+.color-chart-label[b-193wimbp92] {
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.78rem;
+    line-height: 1.1;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
 /* /Pages/Game.razor.rz.scp.css */
 .game-page[b-qctktttbka] {
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
     background-color: #121212;
     color: white;
@@ -116,6 +205,30 @@
 
 .game-page[b-qctktttbka]  .mud-typography {
     color: white;
+}
+
+.game-page[b-qctktttbka]  .game-appbar {
+    position: static !important;
+    flex: 0 0 auto;
+    background-color: #1e1e1e;
+    border-bottom: 1px solid #3a3a3a;
+}
+
+.game-page[b-qctktttbka]  .game-appbar-title {
+    font-size: 2.4rem;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0;
+    text-shadow: 2px 2px 0 #6366F1, 4px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.game-page[b-qctktttbka]  .game-appbar-status {
+    color: rgba(255, 255, 255, 0.82);
+    font-weight: 600;
+}
+
+.game-page[b-qctktttbka]  .game-content {
+    padding-top: 24px;
 }
 
 .game-layout[b-qctktttbka] {
