@@ -16,7 +16,7 @@ public partial class BoardView : ComponentBase, IDisposable
     private bool _suppressStateChange;
     private HashSet<Position> _removedPositions = [];
     private HashSet<Position> _droppingPositions = [];
-    private HashSet<int> _collapsingColumns = [];
+    private Dictionary<Position, int> _shiftingPositions = [];
 
     protected override void OnInitialized()
     {
@@ -47,19 +47,20 @@ public partial class BoardView : ComponentBase, IDisposable
 
         await Task.Delay(500);
 
-        // Phase 2: collapse any columns that are now entirely empty
+        // Phase 2: shift tokens left without changing the fixed 10x10 table layout.
+        var removedPositions = _removedPositions;
         _removedPositions = [];
         _droppingPositions = [];
-        _collapsingColumns = GetEmptyColumns(Session.State.Board);
+        _shiftingPositions = GetShiftedPositions(_previousBoard, Session.State.Board, removedPositions);
 
-        if (_collapsingColumns.Count > 0)
+        if (_shiftingPositions.Count > 0)
         {
             StateHasChanged();
             await Task.Delay(400);
         }
 
         _isAnimating = false;
-        _collapsingColumns = [];
+        _shiftingPositions = [];
         StateHasChanged();
     }
 
@@ -79,8 +80,16 @@ public partial class BoardView : ComponentBase, IDisposable
         if (_isAnimating && _droppingPositions.Contains(pos))
             return "token-drop";
 
+        if (_isAnimating && _shiftingPositions.ContainsKey(pos))
+            return "token-shift-left";
+
         return "";
     }
+
+    private string GetShiftStyle(Position pos) =>
+        _shiftingPositions.TryGetValue(pos, out var shiftCells)
+            ? $"--shift-x: {shiftCells * 35}px;"
+            : "";
 
     private Token GetDisplayToken(Position pos)
     {
@@ -104,31 +113,61 @@ public partial class BoardView : ComponentBase, IDisposable
         };
     }
 
-    private string GetCollapseClass(int col) =>
-        _collapsingColumns.Contains(col) ? "cell-collapsing" : "";
-
-    private HashSet<int> GetEmptyColumns(GameBoard board)
+    private static Dictionary<Position, int> GetShiftedPositions(
+        GameBoard? before,
+        GameBoard after,
+        HashSet<Position> removedPositions)
     {
-        var empty = new HashSet<int>();
+        if (before is null)
+            return [];
 
-        for (int c = 0; c < board.Cols; c++)
+        var sourceColumns = GetColumnsWithRemainingTokens(before, removedPositions);
+        var shifted = new Dictionary<Position, int>();
+
+        for (int destinationCol = 0; destinationCol < sourceColumns.Count; destinationCol++)
         {
-            var colEmpty = true;
+            var sourceCol = sourceColumns[destinationCol];
+            var shiftCells = sourceCol - destinationCol;
 
-            for (int r = 0; r < board.Rows; r++)
+            if (shiftCells <= 0)
+                continue;
+
+            for (int r = 0; r < after.Rows; r++)
             {
-                if (!board.GetToken(new Position(r, c)).IsEmpty)
-                {
-                    colEmpty = false;
-                    break;
-                }
-            }
+                var pos = new Position(r, destinationCol);
 
-            if (colEmpty)
-                empty.Add(c);
+                if (!after.GetToken(pos).IsEmpty)
+                    shifted[pos] = shiftCells;
+            }
         }
 
-        return empty;
+        return shifted;
+    }
+
+    private static List<int> GetColumnsWithRemainingTokens(GameBoard before, HashSet<Position> removedPositions)
+    {
+        var columns = new List<int>();
+
+        for (int c = 0; c < before.Cols; c++)
+        {
+            if (ColumnHasRemainingTokens(before, c, removedPositions))
+                columns.Add(c);
+        }
+
+        return columns;
+    }
+
+    private static bool ColumnHasRemainingTokens(GameBoard board, int col, HashSet<Position> removedPositions)
+    {
+        for (int r = 0; r < board.Rows; r++)
+        {
+            var pos = new Position(r, col);
+
+            if (!removedPositions.Contains(pos) && !board.GetToken(pos).IsEmpty)
+                return true;
+        }
+
+        return false;
     }
 
     private HashSet<Position> GetRemovedPositions(GameBoard before, GameBoard after)

@@ -23,5 +23,5 @@ public interface IMoveValidator
     /// Performs a detailed validation and returns reasons for failure.
     /// Useful for UI feedback and debugging.
     /// </summary>
-    public ValidationResult Validate(GameState state, Move move);
+    public ValidationResult? Validate(GameState state, Move move);
 }

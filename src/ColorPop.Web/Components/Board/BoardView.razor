@@ -13,10 +13,12 @@
                         var pos = new Position(r, c);
                         var displayToken = GetDisplayToken(pos);
                         var animClass = GetAnimClass(pos);
+                        var shiftStyle = GetShiftStyle(pos);
 
-                        <td class="cell @GetCollapseClass(pos.Col)"
+                        <td class="board-cell"
                             @onclick="() => OnCellClicked(pos)">
-                            <div class="token @GetTokenColorClass(displayToken) @animClass"></div>
+                            <div class="token @GetTokenColorClass(displayToken) @animClass"
+                                 style="@shiftStyle"></div>
                         </td>
                     }
                 </tr>

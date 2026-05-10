@@ -13,10 +13,10 @@ public class MoveValidator : IMoveValidator
     public bool IsValid(GameState state, Move move)
     {
         var result = Validate(state, move);
-        return result == ValidationResult.Success;
+        return result is null;
     }
 
-    public ValidationResult Validate(GameState state, Move move)
+    public ValidationResult? Validate(GameState state, Move move)
     {
         if (state.Status != GameStatus.InProgress)
             return new ValidationResult("Game is not in progress.");
