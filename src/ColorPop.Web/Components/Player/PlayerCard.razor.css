@@ -1,0 +1,20 @@
+.player-card-shell {
+    width: 100%;
+    max-width: 400px;
+}
+
+.player-card-shell ::deep .player-card {
+    background-color: #2d2d2d;
+    border-color: #3a3a3a;
+    color: white;
+}
+
+.player-card-shell ::deep .mud-card-content {
+    color: white;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}

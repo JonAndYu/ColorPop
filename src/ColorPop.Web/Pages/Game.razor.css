@@ -1,0 +1,40 @@
+.game-page {
+    min-height: 100vh;
+    background-color: #121212;
+    color: white;
+}
+
+.game-page ::deep .mud-typography {
+    color: white;
+}
+
+.game-layout {
+    display: grid;
+    grid-template-columns: minmax(260px, 400px) auto minmax(260px, 400px);
+    justify-content: space-evenly;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.player-card-column,
+.board-column {
+    display: flex;
+    justify-content: center;
+}
+
+.board-column {
+    min-width: 0;
+}
+
+@media (max-width: 1199.98px) {
+    .game-layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        justify-items: center;
+    }
+
+    .player-card-column,
+    .board-column {
+        width: 100%;
+    }
+}

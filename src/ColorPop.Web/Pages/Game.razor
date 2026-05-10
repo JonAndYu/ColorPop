@@ -1,17 +1,38 @@
 @using ColorPop.Application.Interface
 @using ColorPop.Web.Components.Board
+@using ColorPop.Web.Components.Player
+@using MudBlazor
 
-@page "/game"
+@page "/Game"
 @inject IGameSession Session
 
 @implements IDisposable
 
-<h3>ColorPop</h3>
+<div class="game-page">
+    <MudContainer MaxWidth="MaxWidth.False" Class="pa-4">
+        <MudStack Spacing="3">
+            <div>
+                <MudText Typo="Typo.h4">ColorPop</MudText>
+                <MudText Typo="Typo.body1">Turn: @Session.State.TurnNumber</MudText>
+                <MudText Typo="Typo.body1">Player: @Session.State.CurrentPlayer.Name</MudText>
+            </div>
 
-<p>Turn: @Session.State.TurnNumber</p>
-<p>Player: @Session.State.CurrentPlayer.Name</p>
+            <div class="game-layout">
+                <div class="player-card-column">
+                    <PlayerCard />
+                </div>
 
-<BoardView Session="Session" />
+                <div class="board-column">
+                    <BoardView Session="Session" />
+                </div>
+
+                <div class="player-card-column">
+                    <PlayerCard />
+                </div>
+            </div>
+        </MudStack>
+    </MudContainer>
+</div>
 
 @code {
     protected override void OnInitialized()

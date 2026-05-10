@@ -1,10 +1,58 @@
 @page "/"
 
-@code {
-    [Inject] private NavigationManager Nav { get; set; } = default!;
+@using MudBlazor
 
-    protected override void OnInitialized()
-    {
-        Nav.NavigateTo("game", replace: true);
-    }
-}
+<div class="index-page">
+    <MudMainContent Style="height:100vh; background-color:#121212;"
+                    Class="d-flex flex-column align-center justify-center">
+
+        <!-- Title ABOVE card -->
+        <MudText Class="title mb-4">
+            ColorPop
+        </MudText>
+
+        <!-- Main Card -->
+        <MudPaper Elevation="10"
+                  Class="pa-6"
+                  Style="border-radius:20px; width:360px; background-color:#1e1e1e;">
+
+            <MudStack Spacing="3">
+
+                <!-- Buttons -->
+                <MudButton Class="whimsy-btn primary" FullWidth="true">
+                    Create Game
+                </MudButton>
+
+                <MudButton Class="whimsy-btn secondary" FullWidth="true">
+                    Join Game
+                </MudButton>
+
+                <!-- Code row -->
+                <div class="code-row">
+                    <MudText Typo="Typo.subtitle1" Class="code-label">
+                        Code
+                    </MudText>
+
+                    <MudTextField T="string"
+                                  @bind-Value="_gameCode"
+                                  Placeholder="Enter code"
+                                  Variant="MudBlazor.Variant.Outlined"
+                                  Margin="Margin.Dense"
+                                  Class="code-input" />
+                </div>
+
+                <!-- Bottom right Practice button -->
+                <div class="bottom-row">
+                    <MudSpacer />
+
+                    <MudButton Class="practice-btn" @onclick="PracticeButton_OnClick">
+                        Practice
+                    </MudButton>
+                </div>
+
+            </MudStack>
+
+        </MudPaper>
+
+    </MudMainContent>
+</div>

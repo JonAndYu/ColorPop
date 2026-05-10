@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="bunit" />
     <PackageReference Include="coverlet.collector" />
     <PackageReference Include="FluentAssertions" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
@@ -22,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\ColorPop.Core\ColorPop.Core.csproj" />
+    <ProjectReference Include="..\..\src\ColorPop.Web\ColorPop.Web.csproj" />
   </ItemGroup>
 
 </Project>

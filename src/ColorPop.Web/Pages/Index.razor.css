@@ -1,0 +1,71 @@
+.index-page {
+    min-height: 100vh;
+}
+
+.index-page ::deep .title {
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: white;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0 #6366F1, 4px 4px 10px rgba(0,0,0,0.5);
+}
+
+.index-page ::deep .whimsy-btn {
+    border-radius: 999px;
+    padding: 12px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-transform: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+}
+
+.index-page ::deep .whimsy-btn.primary {
+    background: linear-gradient(135deg, #6366F1, #8B5CF6);
+    color: white;
+}
+
+.index-page ::deep .whimsy-btn.secondary {
+    background: linear-gradient(135deg, #EC4899, #F59E0B);
+    color: white;
+}
+
+.index-page ::deep .whimsy-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.code-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.index-page ::deep .code-label {
+    color: white;
+    min-width: 50px;
+}
+
+.index-page ::deep .code-input {
+    flex: 1;
+}
+
+.bottom-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+.index-page ::deep .practice-btn {
+    border-radius: 12px;
+    background: #2d2d2d;
+    color: white;
+    padding: 6px 14px;
+    font-weight: 600;
+    text-transform: none;
+    transition: all 0.2s ease;
+}
+
+.index-page ::deep .practice-btn:hover {
+    background: #3a3a3a;
+    transform: translateY(-1px);
+}

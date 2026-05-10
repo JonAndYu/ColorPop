@@ -9,6 +9,8 @@ namespace ColorPop.Web.Components.Board;
 
 public partial class BoardView : ComponentBase, IDisposable
 {
+    private const int CellSizePx = 50;
+
     [Parameter] public IGameSession Session { get; set; } = default!;
 
     private GameBoard? _previousBoard;
@@ -88,7 +90,7 @@ public partial class BoardView : ComponentBase, IDisposable
 
     private string GetShiftStyle(Position pos) =>
         _shiftingPositions.TryGetValue(pos, out var shiftCells)
-            ? $"--shift-x: {shiftCells * 35}px;"
+            ? $"--shift-x: {shiftCells * CellSizePx}px;"
             : "";
 
     private Token GetDisplayToken(Position pos)
