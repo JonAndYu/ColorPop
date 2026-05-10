@@ -45,6 +45,7 @@ coverage/
 # Publish output
 # =========================
 publish/
+publish-check/
 
 # =========================
 # Environment / secrets
