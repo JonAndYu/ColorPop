@@ -24,6 +24,11 @@ jobs:
       - name: Fix base href for GitHub Pages
         run: sed -i 's|<base href="/" />|<base href="/ColorPop/" />|g' publish/wwwroot/index.html
 
+      - name: Cache bust CSS assets
+        run: |
+          sed -i "s|href=\"css/app.css\"|href=\"css/app.css?v=${GITHUB_SHA}\"|g" publish/wwwroot/index.html
+          sed -i "s|href=\"ColorPop.Web.styles.css\"|href=\"ColorPop.Web.styles.css?v=${GITHUB_SHA}\"|g" publish/wwwroot/index.html
+
       - name: Copy index.html to 404.html
         run: cp publish/wwwroot/index.html publish/wwwroot/404.html
 
