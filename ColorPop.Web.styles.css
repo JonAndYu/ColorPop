@@ -51,6 +51,10 @@
     background: linear-gradient(45deg, red, blue, green);
 }
 
+.joker[style*="--joker-color"][b-tshhqryhst] {
+    background: linear-gradient(135deg, var(--joker-color), #ffffff 48%, var(--joker-color));
+}
+
 .empty[b-tshhqryhst] {
     background: #f5f5f5;
 }
@@ -85,6 +89,42 @@
     animation: token-shift-left-b-tshhqryhst 0.4s ease-in-out forwards;
 }
 
+/* /Components/Game/JokerSelector.razor.rz.scp.css */
+.joker-selector-panel[b-bzaxcwgmli] {
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+    padding-top: 18px;
+}
+
+.joker-selector-title[b-bzaxcwgmli] {
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.joker-selector[b-bzaxcwgmli] {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.joker-option[b-bzaxcwgmli] {
+    width: 34px;
+    height: 34px;
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    background: var(--joker-option-color);
+    cursor: pointer;
+    transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+}
+
+.joker-option:hover[b-bzaxcwgmli],
+.joker-option.selected[b-bzaxcwgmli] {
+    border-color: white;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35);
+    transform: translateY(-2px);
+}
 /* /Components/Player/PlayerCard.razor.rz.scp.css */
 .player-card-shell[b-193wimbp92] {
     width: 100%;
@@ -247,6 +287,11 @@
 
 .board-column[b-qctktttbka] {
     min-width: 0;
+}
+
+.board-area[b-qctktttbka] {
+    display: grid;
+    justify-items: center;
 }
 
 @media (max-width: 1199.98px) {
