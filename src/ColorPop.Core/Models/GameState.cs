@@ -46,6 +46,12 @@ public sealed record GameState
     public int TurnNumber { get; init; }
 
     /// <summary>
+    /// Optional color selected by the current player for joker tokens this turn.
+    /// If null, jokers are ignored during cluster formation.
+    /// </summary>
+    public TokenColor? SelectedJokerColor { get; init; }
+
+    /// <summary>
     /// Creates a new immutable GameState snapshot.
     /// </summary>
     /// <param name="board">Current board state</param>
@@ -59,13 +65,15 @@ public sealed record GameState
         IReadOnlyList<Player> players,
         int currentPlayerIndex,
         GameStatus status,
-        int turnNumber = 0)
+        int turnNumber = 0,
+        TokenColor? selectedJokerColor = null)
     {
         Board = board;
         Players = players;
         CurrentPlayerIndex = currentPlayerIndex;
         Status = status;
         TurnNumber = turnNumber;
+        SelectedJokerColor = selectedJokerColor;
     }
 
     /// <summary>

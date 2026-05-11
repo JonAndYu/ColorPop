@@ -16,16 +16,17 @@ public sealed class BoardShuffler : IBoardShuffler
         var random = new RandomProvider(seed);
 
         var size = settings.BoardSize;
-        var colors = GetPlayableColors();
+        var tokens = CreateBalancedTokenBag(size);
+        random.Shuffle(tokens);
 
         var grid = new Token[size, size];
+        var index = 0;
 
         for (int row = 0; row < size; row++)
         {
             for (int col = 0; col < size; col++)
             {
-                var color = random.Pick(colors);
-                grid[row, col] = new Token(color);
+                grid[row, col] = tokens[index++];
             }
         }
 
@@ -70,16 +71,42 @@ public sealed class BoardShuffler : IBoardShuffler
         return new Board(newGrid);
     }
 
+    private static List<Token> CreateBalancedTokenBag(int size)
+    {
+        const int jokerCount = 5;
+
+        var cellCount = size * size;
+        var playableColors = GetPlayableColors();
+        var colorCellCount = cellCount - jokerCount;
+        var baseCountPerColor = colorCellCount / playableColors.Length;
+        var remainder = colorCellCount % playableColors.Length;
+
+        var tokens = new List<Token>(cellCount);
+
+        for (var i = 0; i < jokerCount; i++)
+            tokens.Add(new Token(TokenColor.Joker));
+
+        for (var colorIndex = 0; colorIndex < playableColors.Length; colorIndex++)
+        {
+            var color = playableColors[colorIndex];
+            var colorCount = baseCountPerColor + (colorIndex < remainder ? 1 : 0);
+
+            for (var i = 0; i < colorCount; i++)
+                tokens.Add(new Token(color));
+        }
+
+        return tokens;
+    }
+
     private static TokenColor[] GetPlayableColors()
     {
-        return new[]
-        {
-            TokenColor.Blue,
-            TokenColor.Green,
+        return
+        [
             TokenColor.Yellow,
+            TokenColor.Green,
             TokenColor.Pink,
             TokenColor.Orange,
-            TokenColor.Joker,
-        };
+            TokenColor.Blue
+        ];
     }
 }

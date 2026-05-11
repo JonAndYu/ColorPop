@@ -42,11 +42,11 @@ public sealed class ClusterFinder : IClusterFinder
 
                 var token = board.GetToken(position);
 
-                // Skip empty cells
-                if (token.Color == TokenColor.Empty)
+                // Skip empty and unselected joker cells
+                if (token.Color is TokenColor.Empty or TokenColor.Joker)
                     continue;
 
-                var cluster = FloodFill(board, position, token.Color);
+                var cluster = FloodFill(board, position, token.Color, jokerColor: null);
 
                 // Mark all positions in this cluster as visited
                 foreach (var pos in cluster)
@@ -64,13 +64,23 @@ public sealed class ClusterFinder : IClusterFinder
     /// Color is inferred from the starting token.
     /// </summary>
     public IReadOnlySet<Position> FindCluster(Board board, Position start)
+        => FindCluster(board, start, jokerColor: null);
+
+    /// <summary>
+    /// Finds the cluster connected to a starting position.
+    /// Jokers only participate when a joker color has been selected for the turn.
+    /// </summary>
+    public IReadOnlySet<Position> FindCluster(Board board, Position start, TokenColor? jokerColor)
     {
         var token = board.GetToken(start);
 
         if (token.Color == TokenColor.Empty)
             return new HashSet<Position>();
 
-        return FloodFill(board, start, token.Color);
+        if (token.Color == TokenColor.Joker)
+            return new HashSet<Position>();
+
+        return FloodFill(board, start, token.Color, jokerColor);
     }
 
     /// <summary>
@@ -82,13 +92,17 @@ public sealed class ClusterFinder : IClusterFinder
         if (color == TokenColor.Empty)
             return new HashSet<Position>();
 
-        return FloodFill(board, start, color);
+        return FloodFill(board, start, color, jokerColor: null);
     }
 
     /// <summary>
     /// Core flood-fill algorithm (BFS) used to discover connected components.
     /// </summary>
-    private IReadOnlySet<Position> FloodFill(Board board, Position start, TokenColor color)
+    private IReadOnlySet<Position> FloodFill(
+        Board board,
+        Position start,
+        TokenColor color,
+        TokenColor? jokerColor)
     {
         var result = new HashSet<Position>();
         var queue = new Queue<Position>();
@@ -117,8 +131,9 @@ public sealed class ClusterFinder : IClusterFinder
 
                 var token = board.GetToken(neighbor);
 
-                // Only include matching color tokens
-                if (token.Color != color)
+                // Only include matching color tokens. Jokers match only the selected turn color.
+                if (token.Color != color &&
+                    (jokerColor is null || jokerColor != color || token.Color != TokenColor.Joker))
                     continue;
 
                 result.Add(neighbor);

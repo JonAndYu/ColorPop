@@ -1,0 +1,21 @@
+@using ColorPop.Core.Enums
+
+<div class="joker-selector-panel">
+    <span class="joker-selector-title">Joker Selector</span>
+
+    <div class="joker-selector" aria-label="Joker selector">
+        @foreach (var option in _options)
+        {
+            var isSelected = SelectedColor == option.Color;
+
+            <button type="button"
+                    class="joker-option @(isSelected ? "selected" : "")"
+                    style="@GetOptionStyle(option)"
+                    title="@option.Label"
+                    aria-label="@($"Set jokers to {option.Label}")"
+                    aria-pressed="@isSelected"
+                    @onclick="() => SelectColor(option.Color)">
+            </button>
+        }
+    </div>
+</div>

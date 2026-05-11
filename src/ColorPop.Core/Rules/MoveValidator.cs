@@ -28,13 +28,21 @@ public class MoveValidator : IMoveValidator
             return new ValidationResult("Move is out of bounds.");
 
         var token = state.Board.GetToken(move.StartPosition);
+
+        if (token.IsEmpty)
+            return new ValidationResult("Cannot select an empty cell.");
+
+        if (token.Color == TokenColor.Joker)
+            return new ValidationResult("Cannot select a joker cell.");
+
         var neighborCount = 0;
 
         foreach (var dir in Direction.Orthogonal)
         {
             var offset = move.StartPosition.Offset(dir);
 
-            if (state.Board.IsInBounds(offset) && state.Board.GetToken(offset).Color == token.Color)
+            if (state.Board.IsInBounds(offset) &&
+                IsMatchingNeighbor(state.Board.GetToken(offset), token.Color, state.SelectedJokerColor))
             {
                 neighborCount++;
             }
@@ -43,12 +51,14 @@ public class MoveValidator : IMoveValidator
         if (neighborCount == 0)
             return new ValidationResult("Cannot select a cell with no same-color neighbors.");
 
-        if (token.IsEmpty)
-            return new ValidationResult("Cannot select an empty cell.");
-
-        if (token.Color == TokenColor.Joker)
-            return new ValidationResult("Cannot select a joker cell.");
-
         return ValidationResult.Success;
+    }
+
+    private static bool IsMatchingNeighbor(Token neighbor, TokenColor selectedColor, TokenColor? selectedJokerColor)
+    {
+        if (neighbor.Color == selectedColor)
+            return true;
+
+        return selectedJokerColor == selectedColor && neighbor.Color == TokenColor.Joker;
     }
 }

@@ -18,7 +18,7 @@
                         <td class="board-cell"
                             @onclick="() => OnCellClicked(pos)">
                             <div class="token @GetTokenColorClass(displayToken) @animClass"
-                                 style="@shiftStyle"></div>
+                                 style="@GetTokenStyle(displayToken, shiftStyle)"></div>
                         </td>
                     }
                 </tr>

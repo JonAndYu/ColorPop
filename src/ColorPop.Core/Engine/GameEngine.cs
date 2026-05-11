@@ -41,12 +41,13 @@ public sealed class GameEngine : IGameEngine
             return state;
 
         // 2. Find cluster from starting position
-        var cluster = _clusterFinder.FindCluster(state.Board, move.StartPosition);
-
-        // 3. Apply joker expansion rules
-        var resolvedCluster = _jokerResolver.ExpandClusterWithJokers(
+        var cluster = _clusterFinder.FindCluster(
             state.Board,
-            cluster);
+            move.StartPosition,
+            state.SelectedJokerColor);
+
+        // 3. Joker handling is performed by ClusterFinder when SelectedJokerColor is set.
+        var resolvedCluster = cluster;
 
         // 4. Remove tokens (pure board transformation)
         var boardAfterRemoval = state.Board.RemoveCells(resolvedCluster);
@@ -93,6 +94,7 @@ public sealed class GameEngine : IGameEngine
             Status = isGameOver ? GameStatus.Finished : state.Status,
             TurnNumber = state.TurnNumber + 1,
             CurrentPlayerIndex = nextPlayerIndex,
+            SelectedJokerColor = null,
         };
     }
 }

@@ -9,7 +9,7 @@ namespace ColorPop.Web.Components.Board;
 
 public partial class BoardView : ComponentBase, IDisposable
 {
-    private const int CellSizePx = 55;
+    private const int CellSizePx = 50;
 
     [Parameter] public IGameSession Session { get; set; } = default!;
 
@@ -95,6 +95,14 @@ public partial class BoardView : ComponentBase, IDisposable
             ? $"--shift-x: {shiftCells * CellSizePx}px;"
             : "";
 
+    private string GetTokenStyle(Token token, string shiftStyle)
+    {
+        if (token.Color != TokenColor.Joker || Session.State.SelectedJokerColor is not { } jokerColor)
+            return shiftStyle;
+
+        return $"{shiftStyle} --joker-color: {GetTokenHexColor(jokerColor)};";
+    }
+
     private Token GetDisplayToken(Position pos)
     {
         if (_isAnimating && _removedPositions.Contains(pos) && _previousBoard is { } prevBoard)
@@ -114,6 +122,19 @@ public partial class BoardView : ComponentBase, IDisposable
             TokenColor.Orange => "orange",
             TokenColor.Joker => "joker",
             _ => "empty"
+        };
+    }
+
+    private static string GetTokenHexColor(TokenColor color)
+    {
+        return color switch
+        {
+            TokenColor.Blue => "#3498db",
+            TokenColor.Green => "#2ecc71",
+            TokenColor.Yellow => "#f1c40f",
+            TokenColor.Pink => "#ff4fb8",
+            TokenColor.Orange => "#e67e22",
+            _ => "#f5f5f5"
         };
     }
 

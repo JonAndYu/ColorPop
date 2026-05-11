@@ -52,6 +52,11 @@
     min-width: 0;
 }
 
+.board-area {
+    display: grid;
+    justify-items: center;
+}
+
 @media (max-width: 1199.98px) {
     .game-layout {
         grid-template-columns: 1fr;

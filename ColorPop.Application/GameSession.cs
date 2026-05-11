@@ -51,4 +51,10 @@ public class GameSession : IGameSession
         State = _engine.ApplyMove(State, move);
         OnChange?.Invoke();
     }
+
+    public void SelectJokerColor(TokenColor? color)
+    {
+        State = State with { SelectedJokerColor = color };
+        OnChange?.Invoke();
+    }
 }

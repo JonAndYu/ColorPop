@@ -25,7 +25,11 @@
                 </div>
 
                 <div class="board-column">
-                    <BoardView Session="Session" />
+                    <div class="board-area">
+                        <BoardView Session="Session" />
+                        <JokerSelector SelectedColor="Session.State.SelectedJokerColor"
+                                       SelectedColorChanged="Session.SelectJokerColor" />
+                    </div>
                 </div>
 
                 <div class="player-card-column">

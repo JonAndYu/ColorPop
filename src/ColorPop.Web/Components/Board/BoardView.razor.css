@@ -50,6 +50,10 @@
     background: linear-gradient(45deg, red, blue, green);
 }
 
+.joker[style*="--joker-color"] {
+    background: linear-gradient(135deg, var(--joker-color), #ffffff 48%, var(--joker-color));
+}
+
 .empty {
     background: #f5f5f5;
 }

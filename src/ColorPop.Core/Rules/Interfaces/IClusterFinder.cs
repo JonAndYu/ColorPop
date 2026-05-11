@@ -18,6 +18,12 @@ public interface IClusterFinder
     public IReadOnlySet<Position> FindCluster(Board board, Position start);
 
     /// <summary>
+    /// Finds a connected cluster, optionally treating joker tokens as the selected color.
+    /// If jokerColor is null, jokers are ignored.
+    /// </summary>
+    public IReadOnlySet<Position> FindCluster(Board board, Position start, TokenColor? jokerColor);
+
+    /// <summary>
     /// Finds a cluster using an explicit target color.
     /// Useful for joker resolution or override logic.
     /// </summary>
