@@ -43,6 +43,12 @@ public sealed class Player
     public int TotalCapturedCount { get; }
 
     /// <summary>
+    /// Number of captured tokens grouped by playable token color.
+    /// Empty and joker tokens are not counted here.
+    /// </summary>
+    public IReadOnlyDictionary<TokenColor, int> CapturedColorCounts { get; }
+
+    /// <summary>
     /// Whether the player is still active in the game.
     /// </summary>
     public bool IsActive { get; }
@@ -53,7 +59,8 @@ public sealed class Player
         IReadOnlySet<TokenColor> secretColors,
         int capturedOwnColorCount = 0,
         int totalCapturedCount = 0,
-        bool isActive = true)
+        bool isActive = true,
+        IReadOnlyDictionary<TokenColor, int>? capturedColorCounts = null)
     {
         Id = id;
         Name = name;
@@ -61,6 +68,9 @@ public sealed class Player
         CapturedOwnColorCount = capturedOwnColorCount;
         TotalCapturedCount = totalCapturedCount;
         IsActive = isActive;
+        CapturedColorCounts = capturedColorCounts is null
+            ? new Dictionary<TokenColor, int>()
+            : new Dictionary<TokenColor, int>(capturedColorCounts);
     }
 
     /// <summary>
@@ -68,10 +78,16 @@ public sealed class Player
     /// </summary>
     public Player AddCaptured(TokenColor tokenColor)
     {
+        if (tokenColor is TokenColor.Empty or TokenColor.Joker)
+            return this;
+
         var newOwnCount =
             SecretColors.Contains(tokenColor)
                 ? CapturedOwnColorCount + 1
                 : CapturedOwnColorCount;
+
+        var newColorCounts = new Dictionary<TokenColor, int>(CapturedColorCounts);
+        newColorCounts[tokenColor] = newColorCounts.GetValueOrDefault(tokenColor) + 1;
 
         return new Player(
             Id,
@@ -79,7 +95,8 @@ public sealed class Player
             SecretColors,
             newOwnCount,
             TotalCapturedCount + 1,
-            IsActive);
+            IsActive,
+            newColorCounts);
     }
 
     /// <summary>
@@ -92,5 +109,6 @@ public sealed class Player
             SecretColors,
             CapturedOwnColorCount,
             TotalCapturedCount,
-            false);
+            false,
+            CapturedColorCounts);
 }

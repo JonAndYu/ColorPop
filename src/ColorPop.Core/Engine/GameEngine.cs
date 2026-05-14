@@ -55,26 +55,22 @@ public sealed class GameEngine : IGameEngine
         // 5. Apply gravity
         var boardAfterGravity = _gravityEngine.ApplyGravity(boardAfterRemoval);
 
-        // 6. Update players (NOTE: keep minimal here)
-        var updatedPlayers = state.Players
-            .Select(p =>
-            {
-                // Count how many tokens were removed belonging to that player's colors
-                var capturedCount = resolvedCluster
-                    .Count(pos =>
-                    {
-                        var token = state.Board.GetToken(pos);
-                        return p.SecretColors.Contains(token.Color);
-                    });
+        // 6. Update the current player's captured colors. Jokers help form clusters,
+        // but they do not score as the selected color.
+        var updatedPlayers = state.Players.ToList();
+        var currentPlayer = updatedPlayers[state.CurrentPlayerIndex];
 
-                for (int i = 0; i < capturedCount; i++)
-                {
-                    p = p.AddCaptured(state.Board.GetToken(resolvedCluster.First()).Color);
-                }
+        foreach (var position in resolvedCluster)
+        {
+            var token = state.Board.GetToken(position);
 
-                return p;
-            })
-            .ToList();
+            if (token.Color is TokenColor.Empty or TokenColor.Joker)
+                continue;
+
+            currentPlayer = currentPlayer.AddCaptured(token.Color);
+        }
+
+        updatedPlayers[state.CurrentPlayerIndex] = currentPlayer;
 
         // 7. Check win condition
         var isGameOver = _winConditionEvaluator.IsGameOver(

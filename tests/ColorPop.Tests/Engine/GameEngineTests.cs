@@ -1,5 +1,7 @@
+using ColorPop.Core.Enums;
 using ColorPop.Core.Interfaces;
 using ColorPop.Core.Models;
+using ColorPop.Core.Rules;
 using ColorPop.Core.Services;
 
 namespace ColorPop.Tests.Engine;
@@ -65,5 +67,44 @@ public class GameEngineTests
     [Fact]
     public void ApplyMove_JokersEnabled_ExpandsClusterThroughJokers()
     {
+    }
+
+    [Fact]
+    public void ApplyMove_WithSelectedJokerColor_DoesNotCountJokersAsCapturedColor()
+    {
+        // Arrange
+        var sut = new GameEngine(
+            new MoveValidator(),
+            new ClusterFinder(),
+            new JokerResolver(),
+            new GravityEngine(),
+            new WinConditionEvaluator());
+
+        var board = new Board(new[,]
+        {
+            { new Token(TokenColor.Yellow), new Token(TokenColor.Joker) },
+            { new Token(TokenColor.Blue), new Token(TokenColor.Blue) }
+        });
+
+        var players = new List<Player>
+        {
+            new(1, "Player 1", new HashSet<TokenColor>()),
+            new(2, "Player 2", new HashSet<TokenColor>())
+        };
+
+        var state = new GameState(
+            board,
+            players,
+            currentPlayerIndex: 0,
+            status: GameStatus.InProgress,
+            selectedJokerColor: TokenColor.Yellow);
+
+        // Act
+        var updated = sut.ApplyMove(state, new Move(1, new Position(0, 0)));
+
+        // Assert
+        updated.Players[0].CapturedColorCounts[TokenColor.Yellow].Should().Be(1);
+        updated.Players[0].CapturedColorCounts.Should().NotContainKey(TokenColor.Joker);
+        updated.Players[0].TotalCapturedCount.Should().Be(1);
     }
 }

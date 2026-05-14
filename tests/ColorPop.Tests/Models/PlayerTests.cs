@@ -19,6 +19,35 @@ public class PlayerTests
     }
 
     [Fact]
+    public void AddCaptured_ShouldIncrementCapturedColorCount()
+    {
+        // Arrange
+        var player = CreatePlayer(secretColors: [TokenColor.Blue]);
+
+        // Act
+        var updated = player
+            .AddCaptured(TokenColor.Yellow)
+            .AddCaptured(TokenColor.Yellow);
+
+        // Assert
+        updated.CapturedColorCounts[TokenColor.Yellow].Should().Be(2);
+    }
+
+    [Fact]
+    public void AddCaptured_ShouldNotCountJokers()
+    {
+        // Arrange
+        var player = CreatePlayer(secretColors: [TokenColor.Blue]);
+
+        // Act
+        var updated = player.AddCaptured(TokenColor.Joker);
+
+        // Assert
+        updated.TotalCapturedCount.Should().Be(0);
+        updated.CapturedColorCounts.Should().NotContainKey(TokenColor.Joker);
+    }
+
+    [Fact]
     public void AddCaptured_ShouldIncrementOwnColorCount_WhenColorMatches()
     {
         // Arrange
@@ -78,6 +107,7 @@ public class PlayerTests
         updated.Id.Should().Be(player.Id);
         updated.Name.Should().Be(player.Name);
         updated.SecretColors.Should().BeEquivalentTo(player.SecretColors);
+        updated.CapturedColorCounts[TokenColor.Blue].Should().Be(1);
         updated.IsActive.Should().BeTrue();
     }
 
@@ -128,6 +158,7 @@ public class PlayerTests
         eliminated.SecretColors.Should().BeEquivalentTo(player.SecretColors);
         eliminated.CapturedOwnColorCount.Should().Be(3);
         eliminated.TotalCapturedCount.Should().Be(7);
+        eliminated.CapturedColorCounts.Should().BeEquivalentTo(player.CapturedColorCounts);
         eliminated.IsActive.Should().BeFalse();
     }
 

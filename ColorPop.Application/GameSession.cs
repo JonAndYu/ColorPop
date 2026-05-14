@@ -11,8 +11,11 @@ public class GameSession : IGameSession
     private readonly IGameEngine _engine;
     private readonly IBoardShuffler _boardShuffler;
     private readonly GameSettings _settings;
+    private readonly Stack<GameState> _undoStack = [];
 
     public GameState State { get; private set; }
+    public bool IsPracticeMode { get; private set; } = true;
+    public bool CanUndo => IsPracticeMode && _undoStack.Count > 0;
 
     public event Action? OnChange;
 
@@ -20,10 +23,20 @@ public class GameSession : IGameSession
         IGameEngine engine,
         IBoardShuffler boardShuffler,
         GameSettings settings)
+        : this(engine, boardShuffler, settings, isPracticeMode: true)
+    {
+    }
+
+    public GameSession(
+        IGameEngine engine,
+        IBoardShuffler boardShuffler,
+        GameSettings settings,
+        bool isPracticeMode)
     {
         _engine = engine;
         _boardShuffler = boardShuffler;
         _settings = settings;
+        IsPracticeMode = isPracticeMode;
 
         State = CreateInitialState(settings.Seed);
     }
@@ -48,13 +61,31 @@ public class GameSession : IGameSession
 
     public void PlayMove(Move move)
     {
-        State = _engine.ApplyMove(State, move);
+        var previousState = State;
+        var nextState = _engine.ApplyMove(State, move);
+
+        if (IsPracticeMode && !ReferenceEquals(previousState, nextState))
+            nextState = nextState with { CurrentPlayerIndex = 0 };
+
+        if (!ReferenceEquals(previousState, nextState))
+            _undoStack.Push(previousState);
+
+        State = nextState;
         OnChange?.Invoke();
     }
 
     public void SelectJokerColor(TokenColor? color)
     {
         State = State with { SelectedJokerColor = color };
+        OnChange?.Invoke();
+    }
+
+    public void UndoLastMove()
+    {
+        if (!CanUndo)
+            return;
+
+        State = _undoStack.Pop();
         OnChange?.Invoke();
     }
 }
