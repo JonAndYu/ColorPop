@@ -9,7 +9,7 @@ namespace ColorPop.Web.Components.Board;
 
 public partial class BoardView : ComponentBase, IDisposable
 {
-    private const int CellSizePx = 50;
+    private const int _cellSizePx = 50;
 
     [Parameter] public IGameSession Session { get; set; } = default!;
 
@@ -19,7 +19,7 @@ public partial class BoardView : ComponentBase, IDisposable
     private HashSet<Position> _removedPositions = [];
     private HashSet<Position> _droppingPositions = [];
     private Dictionary<Position, int> _shiftingPositions = [];
-    private static string BoardStyle => $"--board-cell-size: {CellSizePx}px;";
+    private static string BoardStyle => $"--board-cell-size: {_cellSizePx}px;";
 
     protected override void OnInitialized()
     {
@@ -92,7 +92,7 @@ public partial class BoardView : ComponentBase, IDisposable
 
     private string GetShiftStyle(Position pos) =>
         _shiftingPositions.TryGetValue(pos, out var shiftCells)
-            ? $"--shift-x: {shiftCells * CellSizePx}px;"
+            ? $"--shift-x: {shiftCells * _cellSizePx}px;"
             : "";
 
     private string GetTokenStyle(Token token, string shiftStyle)
