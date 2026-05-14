@@ -6,7 +6,7 @@ namespace ColorPop.Web.Components.Player;
 
 public partial class PlayerCard : ComponentBase
 {
-    private static readonly ColorDefinition[] ColorDefinitions =
+    private static readonly ColorDefinition[] _colorDefinitions =
     [
         new(TokenColor.Yellow, "Yellow", "#F1C40F"),
         new(TokenColor.Green, "Green", "#2ECC71"),
@@ -22,7 +22,7 @@ public partial class PlayerCard : ComponentBase
     public bool IsInitialized { get; set; } = true;
 
     private string PlayerName => Player?.Name ?? "User Name";
-    private ColorGroup[] ColorGroups => ColorDefinitions
+    private ColorGroup[] ColorGroups => _colorDefinitions
         .Select(color => new ColorGroup(
             color.Label,
             Player?.CapturedColorCounts.GetValueOrDefault(color.TokenColor) ?? 0,
