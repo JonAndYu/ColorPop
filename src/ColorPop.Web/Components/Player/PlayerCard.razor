@@ -10,14 +10,14 @@
                     </MudAvatar>
 
                     <MudText Typo="Typo.h6">
-                        User Name
+                        @PlayerName
                     </MudText>
                 </div>
             </MudCardContent>
 
             <MudCardContent>
                 <div class="color-chart" aria-label="Captured groups by color">
-                    @foreach (var group in _colorGroups)
+                    @foreach (var group in ColorGroups)
                     {
                         <div class="color-chart-item"
                              title="@($"{group.Label}: {group.Count}")">
