@@ -10,6 +10,7 @@
   <Folder Name="/src/">
     <Project Path="ColorPop.Application/ColorPop.Application.csproj" />
     <Project Path="src/ColorPop.Core/ColorPop.Core.csproj" />
+    <Project Path="src/ColorPop.Server/ColorPop.Server.csproj" Id="bce874ac-561b-41a1-bb93-83f594735755" />
     <Project Path="src/ColorPop.Simulation/ColorPop.Simulation.csproj" />
     <Project Path="src/ColorPop.Web/ColorPop.Web.csproj" />
   </Folder>
